@@ -11,4 +11,5 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 
 def index(request):
-    return HttpResponse("hi")
+    context = {}
+    return render(request, 'auth.html', context)
