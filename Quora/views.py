@@ -5,25 +5,32 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm
 
 def index(request, *args, **kwards):
-    form_signup = RegistrationForm(request.POST)
-    form_login = AuthenticationForm(request.POST)
+    # We put both here as both sign up and login have to be in same page/view
+
+    if request.method == "GET":
+        form_signup = RegistrationForm()
+        form_login = AuthenticationForm()
 
     if request.method == "POST":
-        print("debug1")
-
+        form_signup = RegistrationForm(data=request.POST)
+        form_login = AuthenticationForm(data=request.POST)
         if request.POST.get("submit") == "signup":
-            
-            print("debug2")
             if form_signup.is_valid():
-                print("debug3")
                 form_signup.save()
+                form_signup.clean()
                 # redirect somewhere OR show something
-            
+
         elif request.POST.get("submit") == "login":
-            
+            print("debug1")
+            if form_login.is_valid():
+                print("debug2")
+                user_object = form_login.get_user()
+                print("debug3")
+                print(user_object)
+                print("debug1")
 
     context = {
         'form_signup': form_signup,

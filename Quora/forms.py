@@ -25,8 +25,6 @@ class RegistrationForm(forms.ModelForm):
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
 
-        print(user)
-
         if commit:
             user.save()
         return user
