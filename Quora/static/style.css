@@ -89,3 +89,40 @@ div {
     box-sizing: border-box;
     width: 50%;
 }
+
+input[type=submit]{
+
+    background-color: #4692F3;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    float: right;
+
+}
+
+.login_input {
+
+    background-color: #E8E8E8;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+
+.register_input {
+    background-color: white;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.label_register{
+    text-color: #626262
+}
+
+
+

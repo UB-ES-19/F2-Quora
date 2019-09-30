@@ -19,9 +19,29 @@
                 <div class="signup_login">
                     <div class="signup">
                         <h2>Registrarse</h2>
+                        <form action="" method="POST">
+                              {% csrf_token %}
+                              <label class="label_register" for="name">NOMBRE:</label>
+                              <input class="register_input" type="text" name="name" id="name">
+                              <label class="label_register" for="surname">APELLIDO(S):</label>
+                              <input class="register_input" type="text" name="surname" id="surname"> <br>
+                              <label class="label_register" for="mail">CORREO ELECTRÓNICO:</label>
+                              <input class="register_input" type="text" name="mail" id="mail">
+                              <label class="label_register" for="password">CONTRASEÑA:</label>
+                              <input class="register_input" type="password" name="password" id="password">
+                              <input type="hidden" name="next" value="{{ next|escape }}" />
+                              <input type="submit" value="Registrarse" />
+                            </form>
                     </div>
                     <div class="login">
                         <h2>Iniciar sesión</h2>
+                        <form action="" method="POST">
+                              {% csrf_token %}
+                              <input class="login_input" type="text" name="mail" placeholder="Correo electrónico" id="log_mail">
+                              <input class="login_input" type="password" name="password" placeholder="Contraseña" id="log_password">
+                              <input type="hidden" name="next" value="{{ next|escape }}" />
+                              <input type="submit" value="Iniciar Sesión" />
+                            </form>
                     </div>
                 </div>
             </div>
