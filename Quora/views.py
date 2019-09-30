@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
+from django.utils.safestring import mark_safe
 from .forms import RegistrationForm
 
 def index(request, *args, **kwards):
@@ -15,22 +16,35 @@ def index(request, *args, **kwards):
         form_login = AuthenticationForm()
 
     if request.method == "POST":
-        form_signup = RegistrationForm(data=request.POST)
-        form_login = AuthenticationForm(data=request.POST)
         if request.POST.get("submit") == "signup":
+            form_signup = RegistrationForm(data=request.POST)
+            form_login = AuthenticationForm()
+
             if form_signup.is_valid():
                 form_signup.save()
                 form_signup.clean()
                 # redirect somewhere OR show something
 
         elif request.POST.get("submit") == "login":
-            print("debug1")
+            form_signup = RegistrationForm()
+            form_login = AuthenticationForm(data=request.POST)
+
+            print("\t[DEBUG] LOGIN VALID: ", form_login.is_valid())
             if form_login.is_valid():
-                print("debug2")
                 user_object = form_login.get_user()
-                print("debug3")
-                print(user_object)
-                print("debug1")
+                print("\t[DEBUG] LOGIN USER: ", user_object)
+
+                username = form_login.cleaned_data.get('username')
+                password = form_login.cleaned_data.get('password')
+
+                print("\t[DEBUG] username, password: ", username, password)
+
+                user = authenticate(username=username, password=password)
+
+                if user is not None:
+                    print("\t[DEBUG] user: ", user.email)
+                    print(user)
+                    login(request, user)
 
     context = {
         'form_signup': form_signup,

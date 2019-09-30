@@ -20,5 +20,11 @@
             <button type="submit" name="submit" value="login">Login</button>
         </form>
 
+        {% if user.is_authenticated %}
+            Hi {{ user.email }}!
+        {% else %}
+            <p>You are not logged in</p>
+        {% endif %}
+
     {% endblock %}
 </body>
