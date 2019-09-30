@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -10,28 +7,26 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import RegistrationForm, LoginForm
 
-
-
 def index(request, *args, **kwards):
-    form_reg = RegistrationForm(request.POST)
-    form_login = LoginForm(request.POST)
+    form_signup = RegistrationForm(request.POST)
+    form_login = AuthenticationForm(request.POST)
 
     if request.method == "POST":
-        # print("debug1")
+        print("debug1")
 
-        if request.POST.get("submit") == "sign_up":
+        if request.POST.get("submit") == "signup":
             
-            # print("debug2")
-            if form_reg.is_valid():
-                # print("debug3")
-                form_reg.save()
+            print("debug2")
+            if form_signup.is_valid():
+                print("debug3")
+                form_signup.save()
                 # redirect somewhere OR show something
             
         elif request.POST.get("submit") == "login":
-            pass
+            
 
     context = {
-        'form_reg': form_reg,
+        'form_signup': form_signup,
         'form_login': form_login
     }
 

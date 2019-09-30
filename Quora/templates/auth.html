@@ -4,8 +4,20 @@
 </head>
 
 <body>
-    <h1>Register</h1>
+    {% block content %}
+        <h2>Sign up</h2>
 
+        <form method="post">
+            {% csrf_token %}
+            {{ form_signup.as_p }}
+            <button type="submit" name="submit" value="signup">Sign up</button>
+        </form>
 
-    <h1>Login</h1>
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form_login.as_p }}
+            <button type="submit" name="submit" value="login">Login</button>
+        </form>
+    {% endblock %}
 </body>

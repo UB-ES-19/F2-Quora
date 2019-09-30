@@ -4,6 +4,11 @@ from django.contrib.auth.forms import AuthenticationForm
 
 class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(required=True)
+    password = forms.CharField(
+        label = ("Password"),
+        strip=False,
+        widget=forms.PasswordInput
+    )
 
     class Meta:
         model = User
@@ -25,13 +30,3 @@ class RegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
-class LoginForm(AuthenticationForm):
-    email = forms.EmailField(required=True)
-
-    class Meta:
-        model = User
-        fields = [
-            'email',
-            'password'
-        ]
