@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Local
+    'Quora'
 ]
 
 MIDDLEWARE = [
@@ -81,6 +84,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'Quora.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
