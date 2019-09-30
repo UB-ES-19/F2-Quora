@@ -1,0 +1,30 @@
+<!doctype html>
+<head>
+    <title>Quora</title>
+</head>
+
+<body>
+    {% block content %}
+        <h2>Sign up</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form_signup.as_p }}
+            <button type="submit" name="submit" value="signup">Sign up</button>
+        </form>
+
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form_login.as_p }}
+            <button type="submit" name="submit" value="login">Login</button>
+        </form>
+
+        {% if user.is_authenticated %}
+            Hi {{ user.email }}!
+        {% else %}
+            <p>You are not logged in</p>
+        {% endif %}
+
+    {% endblock %}
+</body>
