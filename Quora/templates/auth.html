@@ -1,4 +1,5 @@
 {% load static %}
+{% load filters %}
 <!doctype html>
 <head>
     <link rel="stylesheet" type="text/css" href="{% static "style.css" %}"/>
@@ -18,30 +19,64 @@
             <div class="content_inner">
                 <div class="signup_login">
                     <div class="signup">
-                        <h2>Registrarse</h2>
-                        <form action="" method="POST">
-                              {% csrf_token %}
-                              <label class="label_register" for="name">NOMBRE:</label>
-                              <input class="register_input" type="text" name="name" id="name">
-                              <label class="label_register" for="surname">APELLIDO(S):</label>
-                              <input class="register_input" type="text" name="surname" id="surname"> <br>
-                              <label class="label_register" for="mail">CORREO ELECTRÓNICO:</label>
-                              <input class="register_input" type="text" name="mail" id="mail">
-                              <label class="label_register" for="password">CONTRASEÑA:</label>
-                              <input class="register_input" type="password" name="password" id="password">
-                              <input type="hidden" name="next" value="{{ next|escape }}" />
-                              <input type="submit" value="Registrarse" />
-                            </form>
+                        <h2 class="title">Registrarse</h2>
+                        <div class="EmailSignUp">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                {{ form_signup.non_field_errors }}
+                                <div class="firstLastNameGroup">
+                                    <div class="form_row half">
+                                        <div class="fieldWrapper">
+                                            {{ form_signup.first_name.errors }}
+                                            <label class="label_register" for="{{ form_signup.first_name.id_for_label }}">NOMBRE</label>
+                                            {{ form_signup.first_name | addclass:'register_input' }}
+                                        </div>
+                                    </div>
+                                    <div class="form_row half">
+                                        <div class="fieldWrapper">
+                                            {{ form_signup.last_name.errors }}
+                                            <label class="label_register" for="{{ form_signup.last_name.id_for_label }}">APELLIDO(S)</label>
+                                            {{ form_signup.last_name | addclass:'register_input' }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="fieldWrapper">
+                                        {{ form_signup.email.errors }}
+                                        <label class="label_register" for="{{ form_signup.email.id_for_label }}">CORREO ELECTRÓNICO</label>
+                                        {{ form_signup.email | addclass:'register_input' }}
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="fieldWrapper">
+                                        {{ form_signup.password.errors }}
+                                        <label class="label_register" for="{{ form_signup.password.id_for_label }}">CONTRASEÑA</label>
+                                        {{ form_signup.password | addclass:'register_input' }}
+                                    </div>
+                                </div>
+                            <input type="submit" name="submit" value="Registrarse" />
+                        </form>
+                        </div>
                     </div>
                     <div class="login">
-                        <h2>Iniciar sesión</h2>
+                        <h2 class="title">Iniciar sesión</h2>
                         <form action="" method="POST">
-                              {% csrf_token %}
-                              <input class="login_input" type="text" name="mail" placeholder="Correo electrónico" id="log_mail">
-                              <input class="login_input" type="password" name="password" placeholder="Contraseña" id="log_password">
-                              <input type="hidden" name="next" value="{{ next|escape }}" />
-                              <input type="submit" value="Iniciar Sesión" />
-                            </form>
+                            {% csrf_token %}
+                            {{ form_login.non_field_errors }}
+                            <div class="form_row">
+                                <div class="fieldWrapper">
+                                    {{ form_login.username.errors }}
+                                    {{ form_login.username | addclass:'login_input' }}
+                                </div>
+                            </div>
+                            <div class="form_row">
+                                <div class="fieldWrapper">
+                                    {{ form_login.password.errors }}
+                                    {{ form_login.password | addclass:'login_input' }}
+                                </div>
+                            </div>
+                            <input type="submit" name="submit" value="Iniciar sesión" />
+                        </form>
                     </div>
                 </div>
             </div>
