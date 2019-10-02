@@ -129,7 +129,11 @@ div {
     padding: 0 0 8px;
 }
 
-input[type=submit]{
+.form_row:after {
+    clear: both;
+}
+
+button {
 
     background-color: #3e78ad;
     color: white;
@@ -144,18 +148,21 @@ input[type=submit]{
 
 .login_input {
     display: block;
-    background-color: #e2e2e2;
-    width: 100%;
-    padding: 3px 5px;
-    margin: 8px 0;
+    background-color: #EEE;
     border: 1px solid #ccc;
     border-radius: 4px;
     height: 15px;
     box-sizing: border-box;
-    min-height: 27px;
     outline: 0;
     box-shadow: inset 0 1px 1px rgba(200,200,200,0.3);
     transition: border-color .2s;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.4;
+    padding-left: 8px;
+    padding-right: 8px;
+    min-height: 32px;
+    margin-bottom: 8px;
 }
 
 .register_input {

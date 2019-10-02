@@ -19,7 +19,7 @@
             <div class="content_inner">
                 <div class="signup_login">
                     <div class="signup">
-                        <h2 class="title">Registrarse</h2>
+                        <div class="title">Registrarse</div>
                         <div class="EmailSignUp">
                             <form action="" method="POST">
                                 {% csrf_token %}
@@ -54,12 +54,12 @@
                                         {{ form_signup.password | addclass:'register_input' }}
                                     </div>
                                 </div>
-                            <input type="submit" name="submit" value="Registrarse" />
+                            <button type="submit" name="submit" value="signup">Registrarse</button>
                         </form>
                         </div>
                     </div>
                     <div class="login">
-                        <h2 class="title">Iniciar sesión</h2>
+                        <div class="title">Iniciar sesión</div>
                         <form action="" method="POST">
                             {% csrf_token %}
                             {{ form_login.non_field_errors }}
@@ -75,8 +75,15 @@
                                     {{ form_login.password | addclass:'login_input' }}
                                 </div>
                             </div>
-                            <input type="submit" name="submit" value="Iniciar sesión" />
+                            <button type="submit" name="submit" value="login">Iniciar sesión</button>
                         </form>
+
+                        {% if user.is_authenticated %}
+                            <p>Hi {{ user.email }}!</p>
+                        {% else %}
+                            <p>You are not logged in</p>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
