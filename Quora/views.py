@@ -23,6 +23,7 @@ def index(request, *args, **kwards):
             if form_signup.is_valid():
                 form_signup.save()
                 form_signup.clean()
+                form_signup = RegistrationForm()
                 # redirect somewhere OR show something
 
         elif request.POST.get("submit") == "login":
@@ -45,6 +46,8 @@ def index(request, *args, **kwards):
                     print("\t[DEBUG] user: ", user.email)
                     print(user)
                     login(request, user)
+
+                form_login = AuthenticationForm()
 
     context = {
         'form_signup': form_signup,
