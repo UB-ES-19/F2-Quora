@@ -10,7 +10,7 @@ from .forms import RegistrationForm
 
 def index(request, *args, **kwards):
     # We put both here as both sign up and login have to be in same page/view
-
+    #logout(request)
     if request.method == "GET":
         form_signup = RegistrationForm()
         form_login = AuthenticationForm()
@@ -59,6 +59,11 @@ def index(request, *args, **kwards):
     return render(request, 'auth.html', context)
 
 def pagelogout(request):
-    if request.method == "POST":
-        logout(request)
-        return render(request,'auth.html')
+    form_signup = RegistrationForm()
+    form_login = AuthenticationForm()
+    context = {
+        'form_signup': form_signup,
+        'form_login': form_login
+    }
+    logout(request)
+    return redirect('/')

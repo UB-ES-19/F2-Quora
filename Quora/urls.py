@@ -18,11 +18,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import pagelogout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('index', views.index),
-    path('',pagelogout,name='logout')
+    path("logout",views.pagelogout,name="pagelogout")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
