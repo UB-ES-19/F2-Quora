@@ -70,18 +70,18 @@ div {
     margin-top: 0;
     box-sizing: border-box;
     position: relative;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .content_inner {
     padding: 32px;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .signup_login {
     position: relative;
     margin-bottom: 5px;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .signup {
