@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm
+from .forms import RegistrationForm,Post
 
 def index(request, *args, **kwards):
     # We put both here as both sign up and login have to be in same page/view
@@ -64,6 +64,17 @@ def pagelogout(request):
     return redirect('/')
 
 def landing(request):
+    context = {}
+    if request.method == "POST":
+        #id = Post.objects.get(post_number=number)
+        #post = Post()
+        #post.post_id = id
+        #post.question = request.POST["question"]
+        #post.user = request.user
+        #post.save()
+        print(request.POST["question"])
+        context = {'question' :request.POST["question"] }
+
     if not request.user.is_authenticated:
         return redirect('/')
-    return render(request, 'index.html')
+    return render(request, 'index.html',context)

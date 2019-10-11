@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+import logging
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -52,13 +53,15 @@ class User(AbstractUser):
 class Post(models.Model):
     """Post model."""
     post_id = models.AutoField(primary_key=True)
-    post_question = models.CharField(max_length=240)
+    post_question = models.CharField(max_length=240) #name has to be equal as the field in forms.py
     post_date = models.DateTimeField() # add automatically current date?
-    post_user = #? user id
+    post_user =  models.ForeignKey(User,null=True,on_delete=models.CASCADE)
     post_answers = [] # array of anwers
-
+    question = models.TextField()
+'''
 class PostAnswers(models.Model):
     ref_post_id = #?
     answer_content = models.CharField()
     answer_date = models.DateTimeField()
     answer_user = #? user who answers
+'''

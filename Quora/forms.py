@@ -30,7 +30,7 @@ class RegistrationForm(forms.ModelForm):
             user.save()
         return user
 
-class PostForm(froms.ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = [
@@ -44,8 +44,8 @@ class PostForm(froms.ModelForm):
         if commit:
             post.save()
         return post
-    
-class PostAnswer(froms.ModelForm):
+'''
+class PostAnswer(forms.ModelForm):
     class Meta:
         model = PostAnswer
         fields = [
@@ -59,3 +59,4 @@ class PostAnswer(froms.ModelForm):
         if commit:
             answer.save()
         return answer
+'''
