@@ -41,7 +41,24 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(('email address'), unique=True)
 
+    # Should add list of posts
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+
+class Post(models.Model):
+    """Post model."""
+    post_id = models.AutoField(primary_key=True)
+    post_question = models.CharField(max_length=240)
+    post_date = models.DateTimeField() # add automatically current date?
+    post_user = #? user id
+    post_answers = [] # array of anwers
+
+class PostAnswers(models.Model):
+    ref_post_id = #?
+    answer_content = models.CharField()
+    answer_date = models.DateTimeField()
+    answer_user = #? user who answers
