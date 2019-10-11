@@ -1,0 +1,33 @@
+html {
+    height: 100%;
+    font-weight: 400;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+body {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    color: #333;
+    font-size: 13px;
+}
+
+div {
+    display: block;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, ul, ol, li {
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: none;
+}
