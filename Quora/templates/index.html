@@ -11,7 +11,6 @@
 {% block content %}
     <a href="{% url 'pagelogout' %}"><button>Logout</button></a>
     <p>Hi {{ user.email }}!</p>
-    <p>{{ question }}</p>
 
     <a id="AskQuestionButton" class="AskQuestionButton" data-toggle="modal" data-target="#openQuestionModal"> What is your question or link?</a>
 
@@ -98,5 +97,12 @@
             </div>
         </div>
     </div>
+
+    {% for post in list %}
+        <p>"id" {{ post.id}}</p>
+        <p>"question:"{{ post.question }}</p>
+        <p>"date":{{ post.post_date }}</p>
+        <p>"user":{{ post.user }}</p>
+    {% endfor %}
 
 {% endblock content %}

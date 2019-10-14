@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth import get_user_model
 from django.db import models
 import logging
 
@@ -49,14 +50,13 @@ class User(AbstractUser):
 
     objects = UserManager()
 
-
+from datetime import datetime
 class Post(models.Model):
     """Post model."""
-    post_id = models.AutoField(primary_key=True)
-    post_question = models.CharField(max_length=240) #name has to be equal as the field in forms.py
-    post_date = models.DateTimeField() # add automatically current date?
-    post_user =  models.ForeignKey(User,null=True,on_delete=models.CASCADE)
-    post_answers = [] # array of anwers
+    id = models.AutoField(primary_key=True)
+    post_date = models.DateTimeField(default=datetime.now)
+    user = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
+    #post_answers = [] # array of anwers
     question = models.TextField()
 '''
 class PostAnswers(models.Model):

@@ -36,7 +36,7 @@ class PostForm(forms.ModelForm):
         fields = [
             'question'
         ]
-    
+    '''
     def save(self, commit=True):
         post = super().save(commit=False)
         post.question = self.cleaned_data['question']
@@ -44,6 +44,7 @@ class PostForm(forms.ModelForm):
         if commit:
             post.save()
         return post
+    '''
 '''
 class PostAnswer(forms.ModelForm):
     class Meta:
