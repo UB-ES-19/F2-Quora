@@ -64,14 +64,10 @@ def pagelogout(request):
     return redirect('/')
 
 def landing(request):
-    context = {}
+    context = { 'list' : Post.objects.all() }
     if request.method == "POST":
         post = PostForm(request.POST)
-        post.question = request.POST["question"]
-        post.user = request.user
         post.save()
-        print(request.POST["question"])
-        context = { 'list' : Post.objects.all() }
 
     if not request.user.is_authenticated:
         return redirect('/')

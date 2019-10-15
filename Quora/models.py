@@ -60,7 +60,6 @@ class Post(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     question = models.TextField()
 
-
 class Answer(models.Model):
     """Answer model"""
     id = models.AutoField(primary_key=True)
