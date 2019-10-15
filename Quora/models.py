@@ -1,5 +1,9 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth import get_user_model
 from django.db import models
+from datetime import datetime
+import logging
+
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -41,7 +45,35 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(('email address'), unique=True)
 
+    # Should add list of posts
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+
+class Post(models.Model):
+    """Post model."""
+    id = models.AutoField(primary_key=True)
+    post_date = models.DateTimeField(default=datetime.now)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    question = models.TextField()
+
+class Answer(models.Model):
+    """Answer model"""
+    id = models.AutoField(primary_key=True)
+    date = models.DateTimeField(default=datetime.now)
+    original_post = models.ForeignKey(
+        Post, null=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    content = models.TextField()
+
+
+'''
+class PostAnswers(models.Model):
+    ref_post_id = #?
+    answer_content = models.CharField()
+    answer_date = models.DateTimeField()
+    answer_user = #? user who answers
+'''

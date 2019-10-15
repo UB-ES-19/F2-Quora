@@ -74,10 +74,9 @@
                                         <span class="user"> User asked </span>
                                     </div>
                                 </div>
-
                                 <div class="AskQuestionSelector Selector" tabindex="-1">
                                     <div class="selector_input_interaction">
-                                        <textarea class="selector_input" type="text" rows="1" title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc." data-group="js-editable" placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
+                                        <textarea class="selector_input" type="text" name="question" rows="1" title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc." data-group="js-editable" placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -97,5 +96,12 @@
             </div>
         </div>
     </div>
+
+    {% for post in list %}
+        <p>"id" {{ post.id}}</p>
+        <p>"question:"{{ post.question }}</p>
+        <p>"date":{{ post.post_date }}</p>
+        <p>"user":{{ post.user }}</p>
+    {% endfor %}
 
 {% endblock content %}
