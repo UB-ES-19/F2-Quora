@@ -60,6 +60,7 @@ class Post(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     question = models.TextField()
 
+
 class Answer(models.Model):
     """Answer model"""
     id = models.AutoField(primary_key=True)
@@ -68,11 +69,3 @@ class Answer(models.Model):
         Post, null=False, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     content = models.TextField()
-
-
-'''
-class PostAnswers(models.Model):
-    ref_post_id = #?
-    answer_content = models.CharField()
-    answer_date = models.DateTimeField()
-    answer_user = #? user who answers
