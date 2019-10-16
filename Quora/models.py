@@ -76,4 +76,3 @@ class PostAnswers(models.Model):
     answer_content = models.CharField()
     answer_date = models.DateTimeField()
     answer_user = #? user who answers
-'''
