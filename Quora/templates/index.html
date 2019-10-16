@@ -10,6 +10,7 @@
 
 {% block content %}
     <a href="{% url 'pagelogout' %}"><button>Logout</button></a>
+    <p>Hi {{ user.email }}!</p>
 
     <a id="AskQuestionButton" class="AskQuestionButton" data-toggle="modal" data-target="#openQuestionModal"> What is your question or link?</a>
 
@@ -73,10 +74,9 @@
                                         <span class="user"> User asked </span>
                                     </div>
                                 </div>
-
                                 <div class="AskQuestionSelector Selector" tabindex="-1">
                                     <div class="selector_input_interaction">
-                                        <textarea class="selector_input" type="text" rows="1" title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc." data-group="js-editable" placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
+                                        <textarea class="selector_input" type="text" name="question" rows="1" title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc." data-group="js-editable" placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -96,5 +96,12 @@
             </div>
         </div>
     </div>
+
+    {% for post in list %}
+        <p>"id" {{ post.id}}</p>
+        <p>"question:"{{ post.question }}</p>
+        <p>"date":{{ post.post_date }}</p>
+        <p>"user":{{ post.user }}</p>
+    {% endfor %}
 
 {% endblock content %}

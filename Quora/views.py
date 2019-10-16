@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm
+from .forms import RegistrationForm,Post , PostForm
 
 def index(request, *args, **kwards):
     # We put both here as both sign up and login have to be in same page/view
@@ -22,10 +22,11 @@ def index(request, *args, **kwards):
 
             if form_signup.is_valid():
                 form_signup.save()
-                form_signup.clean()
-                form_signup = RegistrationForm()
-                return render(request, 'index.html')
-                # redirect somewhere OR show something
+                username = form_signup.cleaned_data.get('email')
+                password = form_signup.cleaned_data.get('password')
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                return redirect('/homepage/')
 
         elif request.POST.get("submit") == "login":
             form_signup = RegistrationForm()
@@ -47,7 +48,7 @@ def index(request, *args, **kwards):
                     print("\t[DEBUG] user: ", user.email)
                     print(user)
                     login(request, user)
-                    return render(request, 'index.html')
+                    return redirect('/homepage/')
 
                 form_login = AuthenticationForm()
 
@@ -59,11 +60,15 @@ def index(request, *args, **kwards):
     return render(request, 'auth.html', context)
 
 def pagelogout(request):
-    form_signup = RegistrationForm()
-    form_login = AuthenticationForm()
-    context = {
-        'form_signup': form_signup,
-        'form_login': form_login
-    }
     logout(request)
     return redirect('/')
+
+def landing(request):
+    context = { 'list' : Post.objects.all() }
+    if request.method == "POST":
+        post = PostForm(request.POST)
+        post.save()
+
+    if not request.user.is_authenticated:
+        return redirect('/')
+    return render(request, 'index.html',context)

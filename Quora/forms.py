@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Post
 from django.contrib.auth.forms import AuthenticationForm
 
 class RegistrationForm(forms.ModelForm):
@@ -29,3 +29,33 @@ class RegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = [
+            'question'
+        ]
+    def save(self, commit=True):
+        post = super().save(commit=False)
+        post.question = self.cleaned_data['question']
+
+        if commit:
+            post.save()
+        return post
+'''
+class PostAnswer(forms.ModelForm):
+    class Meta:
+        model = PostAnswer
+        fields = [
+            'answer_content'
+        ]
+    
+    def save(self, commit=True):
+        answer = super().save(commit=False)
+        answer.content = self.cleaned_data['answer_content']
+
+        if commit:
+            answer.save()
+        return answer
+'''
