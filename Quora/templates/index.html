@@ -3,19 +3,36 @@
 {% load static %}
 
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'css/modal_question.css' %}">
-    <title>Quora - Home</title>
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_question.css' %}">
+<title>Quoca - Home</title>
 {% endblock extrahead %}
 
 {% block content %}
-    <a href="{% url 'pagelogout' %}"><button>Logout</button></a>
-    <p>Hi {{ user.email }}!</p>
+<div class="Content">
+    <div class="Welcome">
+        <h2>Hi {{ user.email }}!</h2>
+        <a id="AskQuestionButton" class="AskQuestionButton" data-toggle="modal" data-target="#openQuestionModal"> What
+            is
+            your
+            question?</a>
+        <a href="{% url 'pagelogout' %}" class="LogoutButton">Log out</a>
+    </div>
 
-    <a id="AskQuestionButton" class="AskQuestionButton" data-toggle="modal" data-target="#openQuestionModal"> What is your question or link?</a>
+    <div class="Posts">
+        {% for post in list %}
+        <div class="Post">
+            <div class="PostMeta">
+                <div class="PostDate">{{post.date}}</div>
+                <div class="PostUser"><b>{{post.user}}</b> asks:</div>
+            </div>
+            <div class="PostTitle">{{post.question}}?</div>
+        </div>
+        {% endfor %}
+    </div>
 
     <div class="modal" id="openQuestionModal">
-        <div  class="modal_overlay">
+        <div class="modal_overlay">
             <div class="modal_wrapper normal">
                 <div class="Step AskQuestionStep Modal">
                     <div class="modal_header only_close_button">
@@ -34,33 +51,59 @@
                         <div class="modal_content modal_content_tabs">
                             <div>
                                 <div class="u-border-bottom u-margin-bottom--md u-padding-bottom--sm">
-                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--xs">Tips on getting good answers quickly</p>
+                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--xs">
+                                        Tips on
+                                        getting good answers quickly</p>
                                     <ul class="tip_list">
                                         <div class="u-margin-bottom--sm u-flex u-flex-align--center">
-                                            <span class="ui_icon ui_icon_color--blue ui_icon_size--small ui_icon_outline--default" aria-hidden="true">
-                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path class="icon_svg-stroke" d="M12,3 C16.971,3 21,7.029 21,12 C21,16.971 16.971,21 12,21 C7.029,21 3,16.971 3,12 C3,7.029 7.029,3 12,3 Z M8,12.6290909 L10.9090909,15.5381818 L16,9" stroke="#666666" stroke-width="1.5"></path>
+                                            <span
+                                                class="ui_icon ui_icon_color--blue ui_icon_size--small ui_icon_outline--default"
+                                                aria-hidden="true">
+                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <g fill="none" fill-rule="evenodd" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path class="icon_svg-stroke"
+                                                            d="M12,3 C16.971,3 21,7.029 21,12 C21,16.971 16.971,21 12,21 C7.029,21 3,16.971 3,12 C3,7.029 7.029,3 12,3 Z M8,12.6290909 L10.9090909,15.5381818 L16,9"
+                                                            stroke="#666666" stroke-width="1.5"></path>
                                                     </g>
                                                 </svg>
                                             </span>
-                                            <span class="u-margin-left--sm">Make sure your question hasn't been asked already</span>
+                                            <span class="u-margin-left--sm">Make sure your question hasn't been
+                                                asked
+                                                already</span>
                                         </div>
                                         <div class="u-margin-bottom--sm u-flex u-flex-align--center">
-                                            <span class="ui_icon ui_icon_color--blue ui_icon_size--small ui_icon_outline--default" aria-hidden="true">
-                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path class="icon_svg-stroke" d="M12,3 C16.971,3 21,7.029 21,12 C21,16.971 16.971,21 12,21 C7.029,21 3,16.971 3,12 C3,7.029 7.029,3 12,3 Z M8,12.6290909 L10.9090909,15.5381818 L16,9" stroke="#666666" stroke-width="1.5"></path>
+                                            <span
+                                                class="ui_icon ui_icon_color--blue ui_icon_size--small ui_icon_outline--default"
+                                                aria-hidden="true">
+                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <g fill="none" fill-rule="evenodd" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path class="icon_svg-stroke"
+                                                            d="M12,3 C16.971,3 21,7.029 21,12 C21,16.971 16.971,21 12,21 C7.029,21 3,16.971 3,12 C3,7.029 7.029,3 12,3 Z M8,12.6290909 L10.9090909,15.5381818 L16,9"
+                                                            stroke="#666666" stroke-width="1.5"></path>
                                                     </g>
                                                 </svg>
                                             </span>
-                                            <span class="u-margin-left--sm">Keep your question short and to the point</span>
+                                            <span class="u-margin-left--sm">Keep your question short and to the
+                                                point</span>
                                         </div>
                                         <div class="u-margin-bottom--sm u-flex u-flex-align--center">
-                                            <span class="ui_icon ui_icon_color--blue ui_icon_size--small ui_icon_outline--default" aria-hidden="true">
-                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path class="icon_svg-stroke" d="M12,3 C16.971,3 21,7.029 21,12 C21,16.971 16.971,21 12,21 C7.029,21 3,16.971 3,12 C3,7.029 7.029,3 12,3 Z M8,12.6290909 L10.9090909,15.5381818 L16,9" stroke="#666666" stroke-width="1.5"></path>
+                                            <span
+                                                class="ui_icon ui_icon_color--blue ui_icon_size--small ui_icon_outline--default"
+                                                aria-hidden="true">
+                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <g fill="none" fill-rule="evenodd" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path class="icon_svg-stroke"
+                                                            d="M12,3 C16.971,3 21,7.029 21,12 C21,16.971 16.971,21 12,21 C7.029,21 3,16.971 3,12 C3,7.029 7.029,3 12,3 Z M8,12.6290909 L10.9090909,15.5381818 L16,9"
+                                                            stroke="#666666" stroke-width="1.5"></path>
                                                     </g>
                                                 </svg>
                                             </span>
@@ -76,32 +119,31 @@
                                 </div>
                                 <div class="AskQuestionSelector Selector" tabindex="-1">
                                     <div class="selector_input_interaction">
-                                        <textarea class="selector_input" type="text" name="question" rows="1" title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc." data-group="js-editable" placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
+                                        <textarea class="selector_input" type="text" name="question" rows="1"
+                                            title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."
+                                            data-group="js-editable"
+                                            placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal_footer">
-                        <div class="modal_actions">
-                            <span class="text_links">
-                                <a class="modal_cancel modal_action" data-dismiss="modal" aria-label="Close">Cancel</a>
-                            </span>
-                            <span>
-                                <button class="submit_button modal_action" type="submit" name="submit" value="addQuestion">Add Question</button>
-                            </span>
+                            <div class="modal_actions">
+                                <span class="text_links">
+                                    <a class="modal_cancel modal_action" data-dismiss="modal"
+                                        aria-label="Close">Cancel</a>
+                                </span>
+                                <span>
+                                    <button class="submit_button modal_action" type="submit" name="submit"
+                                        value="addQuestion">Add Question</button>
+                                </span>
+                            </div>
                         </div>
-                    </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-    {% for post in list %}
-        <p>"id" {{ post.id}}</p>
-        <p>"question:"{{ post.question }}</p>
-        <p>"date":{{ post.post_date }}</p>
-        <p>"user":{{ post.user }}</p>
-    {% endfor %}
+</div>
 
 {% endblock content %}

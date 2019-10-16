@@ -6,11 +6,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm,Post , PostForm
+from .forms import RegistrationForm, Post, PostForm
+
 
 def index(request, *args, **kwards):
     # We put both here as both sign up and login have to be in same page/view
-    #logout(request)
+    # logout(request)
     if request.method == "GET":
         form_signup = RegistrationForm()
         form_login = AuthenticationForm()
@@ -59,16 +60,18 @@ def index(request, *args, **kwards):
 
     return render(request, 'auth.html', context)
 
+
 def pagelogout(request):
     logout(request)
     return redirect('/')
 
+
 def landing(request):
-    context = { 'list' : Post.objects.all() }
+    context = {'list': Post.objects.all()}
     if request.method == "POST":
         post = PostForm(request.POST)
         post.save()
 
     if not request.user.is_authenticated:
         return redirect('/')
-    return render(request, 'index.html',context)
+    return render(request, 'index.html', context)

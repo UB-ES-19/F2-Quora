@@ -56,7 +56,7 @@ class User(AbstractUser):
 class Post(models.Model):
     """Post model."""
     id = models.AutoField(primary_key=True)
-    post_date = models.DateTimeField(default=datetime.now)
+    date = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     question = models.TextField()
 
