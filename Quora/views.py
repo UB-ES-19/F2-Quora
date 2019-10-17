@@ -61,7 +61,7 @@ def index(request, *args, **kwards):
     return render(request, 'auth.html', context)
 
 
-def pagelogout(request):
+def logout(request):
     logout(request)
     return redirect('/')
 
@@ -70,6 +70,7 @@ def landing(request):
     context = {'list': Post.objects.all()}
     if request.method == "POST":
         post = PostForm(request.POST)
+        print(post)
         post.save()
 
     if not request.user.is_authenticated:

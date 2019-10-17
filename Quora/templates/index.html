@@ -39,6 +39,7 @@
                     <form action="" method="POST">
                         {% csrf_token %}
                         {{ form.non_field_errors }}
+                        <input type="hidden" name="user" value="{{ user.id }}">
                         <div class="modal_content modal_content_tabs">
                             <div>
                                 <div class="u-border-bottom u-margin-bottom--md u-padding-bottom--sm">
