@@ -76,3 +76,11 @@ def landing(request):
     if not request.user.is_authenticated:
         return redirect('/')
     return render(request, 'index.html', context)
+
+
+def question(request, id):
+    post = Post.objects.get(id=id)
+    context = {
+        'post': post
+    }
+    return render(request, 'view_question.html', context)

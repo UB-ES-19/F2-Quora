@@ -47,7 +47,7 @@ textarea {
 
 .Post {
     display: inline-block;
-    width: 300em;
+    width: 20em;
     background: white;
     padding: 2em;
     margin-right: 1em;
@@ -66,10 +66,6 @@ textarea {
     color: #333;
     font-weight: bold;
     margin-top: .5em;
-}
-
-.Header {
-    padding: 2em;
 }
 
 .logo {

@@ -12,13 +12,15 @@
 <div class="Content">
     <div class="Posts">
         {% for post in list %}
-        <div class="Post">
-            <div class="PostMeta">
-                <div class="PostDate">{{post.date}}</div>
-                <div class="PostUser"><b>{{post.user.first_name}} {{post.user.last_name}}</b> asks:</div>
+        <a href="{% url 'question' id=post.id %}">
+            <div class="Post">
+                <div class="PostMeta">
+                    <div class="PostDate">{{post.date}}</div>
+                    <div class="PostUser"><b>{{post.user.first_name}} {{post.user.last_name}}</b> asks:</div>
+                </div>
+                <div class="PostTitle">{{post.question}}?</div>
             </div>
-            <div class="PostTitle">{{post.question}}?</div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 

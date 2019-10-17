@@ -6,76 +6,73 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{% static 'css/view_question.css' %}">
-<title>Quora - Question</title>
+<title>{{post.question}} - Quora</title>
 
 <!-- title should be {{ question.text}} or similar-->
 
 {% endblock extrahead %}
 
-
-
 {% block content %}
 <div class="container">
-    <div class="NetworkLogo"></div>
-        <div class="row">
-          <div class="column main">
-              {% if question %}
-            <h2 class="question_title">{{question.text}}</h2>
-              {% else %}
-              <h2 class="question_title">Dummy: When will a real question appear? <!--{{question.text}}--></h2>
-              {% endif %}
-            <div class="actions">
-              <a class="active" href="#"><i class="fa fa-fw fa-pencil" style="color:#33beff"></i> Answer</a>
-              <a href="#"><i class="fa fa-fw fa-feed"></i> Follow</a>
-              <a href="#"><i class="fa fa-fw fa-send"></i> Request</a>
-              <a href="#"><i class="fa fa-fw fa-comment"></i></a>
-              <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
-              <a href="#"><i class="fa fa-fw fa-facebook"></i></a>
-              <a href="#"><i class="fa fa-fw fa-twitter"></i></a>
-              <a href="#"><i class="fa fa-fw fa-share"></i></a>
-              <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
-            </div>
-            {% if answers %}
-                <h3 class="subtitle">20 answers</h3>
-                  {%for answ in answers %}
-                <div class="line main"></div><br>
-                <p>{{answ.user}}</p>
-                <p class="date">{{answ.date}}</p>
-                <p>{{answ.text}}</p>
-                <div class="actions">
-                    <a class="active" href="#"><i class="fa fa-fw fa-thumbs-o-up" style="color:#33beff"></i>Upvote</a>
-                    <a href="#"><i class="fa fa-fw fa-share"></i> Share</a>
-                    <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
-                    <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
-                </div>
-                  {% endfor %}
-              {% else %}
+  <div class="row">
+    <div class="column main">
+      <h2 class="question_title">{{post.question}}?</h2>
+      <div class="actions">
+        <a class="active" href="#"><i class="fa fa-fw fa-pencil" style="color:#33beff"></i> Answer</a>
+        <a href="#"><i class="fa fa-fw fa-feed"></i> Follow</a>
+        <a href="#"><i class="fa fa-fw fa-send"></i> Request</a>
+        <a href="#"><i class="fa fa-fw fa-comment"></i></a>
+        <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
+        <a href="#"><i class="fa fa-fw fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-fw fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-fw fa-share"></i></a>
+        <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
+      </div>
+      {% if answers %}
+      <h3 class="subtitle">20 answers</h3>
+      {%for answ in answers %}
+      <div class="line main"></div><br>
+      <p>{{answ.user}}</p>
+      <p class="date">{{answ.date}}</p>
+      <p>{{answ.text}}</p>
+      <div class="actions">
+        <a class="active" href="#"><i class="fa fa-fw fa-thumbs-o-up" style="color:#33beff"></i>Upvote</a>
+        <a href="#"><i class="fa fa-fw fa-share"></i> Share</a>
+        <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
+        <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
+      </div>
+      {% endfor %}
+      {% else %}
 
-                <p>There are no answers to this question yet</p>
-              <!--Dummy content to test changes and see style applied-->
-                <div class="line main"></div><br>
-                <p>Dummy: Person who has answered</p>
-                <p class="date"> Dummy: answer date</p>
-                <p>this is a full and very long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long answer to see how it looks</p>
-            <div class="actions">
-              <a class="active" href="#"><i class="fa fa-fw fa-thumbs-o-up" style="color:#33beff"></i>Upvote</a>
-              <a href="#"><i class="fa fa-fw fa-share"></i> Share</a>
-              <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
-                <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
-            </div>
-              {% endif %}
-              </div>
+      <p>There are no answers to this question yet</p>
+      <!--Dummy content to test changes and see style applied-->
+      <div class="line main"></div><br>
+      <p>Dummy: Person who has answered</p>
+      <p class="date"> Dummy: answer date</p>
+      <p>this is a full and very long long long long long long long long long long long long long long long long long
+        long long long long long long long long long long long long long long long long long long long long long long
+        long long long long long answer to see how it looks</p>
+      <div class="actions">
+        <a class="active" href="#"><i class="fa fa-fw fa-thumbs-o-up" style="color:#33beff"></i>Upvote</a>
+        <a href="#"><i class="fa fa-fw fa-share"></i> Share</a>
+        <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
+        <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
+      </div>
+      {% endif %}
+    </div>
 
-              <div class="column aux">
-                  <div style="margin-left:15px">
-                    <h2 class="related">Related Questions</h2>
-                      <div class="line main"></div><br>
-                    <p>This is related question 1?<br>
-                    This is related question 2?<br> How many related questions will we display?</p>
-                  </div>
-                </div>
+    <!--
+    <div class="column aux">
+      <div style="margin-left:15px">
+        <h2 class="related">Related Questions</h2>
+        <div class="line main"></div><br>
+        <p>This is related question 1?<br>
+          This is related question 2?<br> How many related questions will we display?</p>
+      </div>
+    </div>
+    -->
 
-            </div>
+  </div>
 </div>
 
 {% endblock content %}
