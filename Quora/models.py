@@ -45,8 +45,6 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(('email address'), unique=True)
 
-    # Should add list of posts
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 

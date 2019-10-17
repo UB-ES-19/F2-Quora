@@ -10,21 +10,12 @@
 
 {% block content %}
 <div class="Content">
-    <div class="Welcome">
-        <h2>Hi {{ user.email }}!</h2>
-        <a id="AskQuestionButton" class="AskQuestionButton" data-toggle="modal" data-target="#openQuestionModal"> What
-            is
-            your
-            question?</a>
-        <a href="{% url 'pagelogout' %}" class="LogoutButton">Log out</a>
-    </div>
-
     <div class="Posts">
         {% for post in list %}
         <div class="Post">
             <div class="PostMeta">
                 <div class="PostDate">{{post.date}}</div>
-                <div class="PostUser"><b>{{post.user}}</b> asks:</div>
+                <div class="PostUser"><b>{{post.user.first_name}} {{post.user.last_name}}</b> asks:</div>
             </div>
             <div class="PostTitle">{{post.question}}?</div>
         </div>
