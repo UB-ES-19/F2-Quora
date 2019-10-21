@@ -108,7 +108,11 @@
 
                                 <div class="ask_modal_header u-flex">
                                     <div class="user_asks_header">
-                                        <span class="user"> User asked </span>
+                                        {% if user.first_name != '' %}
+                                            <span class="user"> {{user.first_name}} {{user.last_name}} asked </span>
+                                        {% else %}
+                                            <span class="user"> {{user.email}} asked </span>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="AskQuestionSelector Selector" tabindex="-1">
