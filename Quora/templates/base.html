@@ -32,9 +32,9 @@
                     Welcome, <b>{{user.email}}</b>!
                 {% endif %}
             </div>
-            <div id="new-post-button" class="button" data-toggle="modal" data-target="#openQuestionModal">
+            <button id="new-post-button" class="button" data-toggle="modal" data-target="#openQuestionModal">
                 Ask a question
-            </div>
+            </button>
             <a href="{% url 'logout' %}" class="button ghost">Log out</a>
         </div>
     </div>

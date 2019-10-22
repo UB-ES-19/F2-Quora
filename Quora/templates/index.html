@@ -5,7 +5,7 @@
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 <link rel="stylesheet" href="{% static 'css/modal_question.css' %}">
-<title>Quoca - Home</title>
+<title>Quokka - Home</title>
 {% endblock extrahead %}
 
 {% block content %}
@@ -127,12 +127,12 @@
                         </div>
                         <div class="modal_footer">
                             <div class="modal_actions">
-                                <span class="text_links">
-                                    <a class="modal_cancel modal_action" data-dismiss="modal"
-                                        aria-label="Close">Cancel</a>
+                                <span>
+                                    <a class="button ghost" data-dismiss="modal"
+                                        aria-label="Close" href="">Cancel</a>
                                 </span>
                                 <span>
-                                    <button class="submit_button modal_action" type="submit" name="submit"
+                                    <button class="button" type="submit" name="submit"
                                         value="addQuestion">Add Question</button>
                                 </span>
                             </div>

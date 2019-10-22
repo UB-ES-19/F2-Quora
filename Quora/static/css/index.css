@@ -108,5 +108,5 @@ textarea {
 
 .button.ghost {
     background: transparent;
-    color: #468e9d;
+    color: #468e9d !important;
 }
