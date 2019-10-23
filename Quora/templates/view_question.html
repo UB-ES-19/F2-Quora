@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{% static 'css/view_question.css' %}">
-<title>{{post.question}} - Quora</title>
+<title>{{post.question}} - Quokka</title>
 
 <!-- title should be {{ question.text}} or similar-->
 
@@ -51,7 +51,7 @@
         <input type="hidden" name="original_post" value="{{post.id}}">
         {% csrf_token %}
         {{ answer_form.content | addclass:'answer-input' }}
-        <input type="submit">
+        <input type="submit" class="button">
       </form>
 
     </div>

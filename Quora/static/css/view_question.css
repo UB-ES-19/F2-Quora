@@ -139,4 +139,5 @@ body {
 
 .answer-input {
     width: 100%;
+    resize: none;
 }
