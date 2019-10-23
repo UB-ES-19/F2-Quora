@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
 from .forms import RegistrationForm, Post, PostForm
+from Quora.models import Answer
 
 
 def index(request, *args, **kwards):
@@ -61,7 +62,7 @@ def index(request, *args, **kwards):
     return render(request, 'auth.html', context)
 
 
-def logout(request):
+def logout_page(request):
     logout(request)
     return redirect('/')
 
@@ -71,7 +72,10 @@ def landing(request):
     if request.method == "POST":
         post = PostForm(request.POST)
         print(post)
-        post.save()
+        try:
+            post.save()
+        except:
+            context['error'] = 'Please enter a question!'
 
     if not request.user.is_authenticated:
         return redirect('/')
@@ -80,7 +84,9 @@ def landing(request):
 
 def question(request, id):
     post = Post.objects.get(id=id)
+    answers = Answer.objects.filter(original_post=id)
     context = {
-        'post': post
+        'post': post,
+        'answers': answers
     }
     return render(request, 'view_question.html', context)

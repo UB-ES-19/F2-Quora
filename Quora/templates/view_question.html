@@ -29,12 +29,12 @@
         <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
       </div>
       {% if answers %}
-      <h3 class="subtitle">20 answers</h3>
+      <h3 class="subtitle">{{answers.count}} answers</h3>
       {%for answ in answers %}
       <div class="line main"></div><br>
       <p>{{answ.user}}</p>
       <p class="date">{{answ.date}}</p>
-      <p>{{answ.text}}</p>
+      <p>{{answ.content}}</p>
       <div class="actions">
         <a class="active" href="#"><i class="fa fa-fw fa-thumbs-o-up" style="color:#33beff"></i>Upvote</a>
         <a href="#"><i class="fa fa-fw fa-share"></i> Share</a>
@@ -43,21 +43,7 @@
       </div>
       {% endfor %}
       {% else %}
-
-      <p>There are no answers to this question yet</p>
-      <!--Dummy content to test changes and see style applied-->
-      <div class="line main"></div><br>
-      <p>Dummy: Person who has answered</p>
-      <p class="date"> Dummy: answer date</p>
-      <p>this is a full and very long long long long long long long long long long long long long long long long long
-        long long long long long long long long long long long long long long long long long long long long long long
-        long long long long long answer to see how it looks</p>
-      <div class="actions">
-        <a class="active" href="#"><i class="fa fa-fw fa-thumbs-o-up" style="color:#33beff"></i>Upvote</a>
-        <a href="#"><i class="fa fa-fw fa-share"></i> Share</a>
-        <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
-        <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
-      </div>
+      <p>This post has no answers yet!</p>
       {% endif %}
     </div>
 

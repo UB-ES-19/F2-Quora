@@ -19,6 +19,16 @@
 </head>
 
 <body>
+    {% block notifications %}
+    {% if error %}
+    <div id="notification" class="error">
+        {{error}}
+    </div>
+    {% endif %}
+    <div class="notification">
+
+    </div>
+    {% endblock %}
     {% block header %}
     <div class="header">
         <div class="logo">
@@ -27,9 +37,9 @@
         <div class="user-overview">
             <div class="welcome">
                 {% if user.first_name != '' %}
-                    Welcome, <b>{{user.first_name}} {{user.last_name}}</b>!
+                Welcome, <b>{{user.first_name}} {{user.last_name}}</b>!
                 {% else %}
-                    Welcome, <b>{{user.email}}</b>!
+                Welcome, <b>{{user.email}}</b>!
                 {% endif %}
             </div>
             <button id="new-post-button" class="button" data-toggle="modal" data-target="#openQuestionModal">
@@ -40,6 +50,11 @@
     </div>
     {% endblock header %}
     {% block content %}{% endblock content %}
+
+    <script>
+        setTimeout(function () {$('#notification').addClass('hidden')}, 1500);
+    </script>
+
 </body>
 
 </html>
