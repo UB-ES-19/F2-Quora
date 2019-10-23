@@ -1,6 +1,7 @@
 from django import forms
 from .models import User, Post
 from django.contrib.auth.forms import AuthenticationForm
+from Quora.models import Answer
 
 
 class RegistrationForm(forms.ModelForm):
@@ -49,19 +50,20 @@ class PostForm(forms.ModelForm):
         return post
 
 
-'''
-class PostAnswer(forms.ModelForm):
+class AnswerForm(forms.ModelForm):
     class Meta:
-        model = PostAnswer
+        model = Answer
         fields = [
-            'answer_content'
+            'user',
+            'original_post',
+            'content'
         ]
-    
+
     def save(self, commit=True):
         answer = super().save(commit=False)
-        answer.content = self.cleaned_data['answer_content']
+        answer.content = self.cleaned_data['content']
 
         if commit:
             answer.save()
+
         return answer
-'''

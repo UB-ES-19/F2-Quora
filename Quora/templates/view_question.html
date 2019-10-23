@@ -45,6 +45,15 @@
       {% else %}
       <p>This post has no answers yet!</p>
       {% endif %}
+
+      <form action="" method="POST">
+        <input type="hidden" name="user" value="{{user.id}}">
+        <input type="hidden" name="original_post" value="{{post.id}}">
+        {% csrf_token %}
+        {{ answer_form.content | addclass:'answer-input' }}
+        <input type="submit">
+      </form>
+
     </div>
 
     <!--

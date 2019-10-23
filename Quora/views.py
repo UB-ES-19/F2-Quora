@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm, Post, PostForm
+from .forms import RegistrationForm, Post, PostForm, AnswerForm
 from Quora.models import Answer
 
 
@@ -71,7 +71,6 @@ def landing(request):
     context = {'list': Post.objects.all()}
     if request.method == "POST":
         post = PostForm(request.POST)
-        print(post)
         try:
             post.save()
         except:
@@ -85,8 +84,17 @@ def landing(request):
 def question(request, id):
     post = Post.objects.get(id=id)
     answers = Answer.objects.filter(original_post=id)
+
     context = {
         'post': post,
-        'answers': answers
+        'answers': answers,
+        'answer_form': AnswerForm()
     }
+
+    if request.method == 'POST':
+        answer = AnswerForm(request.POST)
+        try:
+            answer.save()
+        except:
+            context['error'] = 'Please enter an answer!'
     return render(request, 'view_question.html', context)

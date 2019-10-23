@@ -136,3 +136,7 @@ body {
     background: transparent;
     color: #468e9d;
 }
+
+.answer-input {
+    width: 100%;
+}

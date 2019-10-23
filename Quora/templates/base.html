@@ -31,9 +31,11 @@
     {% endblock %}
     {% block header %}
     <div class="header">
-        <div class="logo">
-            Quokka
-        </div>
+        <a href="{% url 'homepage' %}">
+            <div class="logo">
+                Quokka
+            </div>
+        </a>
         <div class="user-overview">
             <div class="welcome">
                 {% if user.first_name != '' %}

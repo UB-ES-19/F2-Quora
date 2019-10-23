@@ -109,9 +109,9 @@
                                 <div class="ask_modal_header u-flex">
                                     <div class="user_asks_header">
                                         {% if user.first_name != '' %}
-                                            <span class="user"> {{user.first_name}} {{user.last_name}} asked </span>
+                                        <span class="user"> {{user.first_name}} {{user.last_name}} asked </span>
                                         {% else %}
-                                            <span class="user"> {{user.email}} asked </span>
+                                        <span class="user"> {{user.email}} asked </span>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -128,12 +128,11 @@
                         <div class="modal_footer">
                             <div class="modal_actions">
                                 <span>
-                                    <a class="button ghost" data-dismiss="modal"
-                                        aria-label="Close" href="">Cancel</a>
+                                    <a class="button ghost" data-dismiss="modal" aria-label="Close" href="">Cancel</a>
                                 </span>
                                 <span>
-                                    <button class="button" type="submit" name="submit"
-                                        value="addQuestion">Add Question</button>
+                                    <button class="button" type="submit" name="submit" value="addQuestion">Add
+                                        Question</button>
                                 </span>
                             </div>
                         </div>
