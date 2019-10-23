@@ -1,11 +1,13 @@
 from django import forms
 from .models import User, Post
 from django.contrib.auth.forms import AuthenticationForm
+from Quora.models import Answer
+
 
 class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     password = forms.CharField(
-        label = ("Password"),
+        label=("Password"),
         strip=False,
         widget=forms.PasswordInput
     )
@@ -18,7 +20,7 @@ class RegistrationForm(forms.ModelForm):
             'email',
             'password'
         ]
-    
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.first_name = self.cleaned_data['first_name']
@@ -30,12 +32,15 @@ class RegistrationForm(forms.ModelForm):
             user.save()
         return user
 
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = [
+            'user',
             'question'
         ]
+
     def save(self, commit=True):
         post = super().save(commit=False)
         post.question = self.cleaned_data['question']
@@ -43,19 +48,22 @@ class PostForm(forms.ModelForm):
         if commit:
             post.save()
         return post
-'''
-class PostAnswer(forms.ModelForm):
+
+
+class AnswerForm(forms.ModelForm):
     class Meta:
-        model = PostAnswer
+        model = Answer
         fields = [
-            'answer_content'
+            'user',
+            'original_post',
+            'content'
         ]
-    
+
     def save(self, commit=True):
         answer = super().save(commit=False)
-        answer.content = self.cleaned_data['answer_content']
+        answer.content = self.cleaned_data['content']
 
         if commit:
             answer.save()
+
         return answer
-'''

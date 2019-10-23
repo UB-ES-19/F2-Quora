@@ -110,8 +110,8 @@
     text-align: center;
     overflow: hidden;
     padding: 16px 32px;
-    color: #b92b27;
-    border-bottom: 1.5px solid #b92b27;
+    color: #468e9d;
+    border-bottom: 1.5px solid #468e9d;
     float: left;
 }
 
@@ -165,15 +165,15 @@
 }
 
 .ui_icon_color--blue .icon_svg-stroke {
-    stroke:#329bff
+    stroke:#468e9d
 }
 
 .ui_icon_color--blue .icon_svg-fill_as_stroke {
-    fill:#329bff
+    fill:#468e9d
 }
 
 .ui_icon_color--blue.ui_icon_outline--filled .icon_svg-fill {
-    fill:#329bff
+    fill:#468e9d
 }
 
 .u-margin-bottom--md {
@@ -240,44 +240,4 @@
 
 .Modal .modal_footer .modal_actions {
     float: right;
-}
-
-.Modal .modal_footer .modal_actions .text_links .modal_action {
-    margin-top: 7px;
-}
-
-.Modal .modal_footer .modal_actions .text_links a,
-.Modal .modal_footer .modal_actions .text_links label {
-    color: #949494;
-    cursor: pointer;
-}
-
-.Modal .modal_footer .modal_actions .submit_button {
-    padding: 6px 8px;
-}
-
-.Modal .modal_footer .modal_action {
-    float: left;
-    margin-left: 16px;
-    display: inline-block;
-}
-
-a {
-    text-decoration: none;
-    background: transparent;
-}
-
-.submit_button {
-    user-select: none;
-    box-sizing: border-box;
-    transition: opacity ease-in-out 100ms,color ease-in-out 100ms,background-color ease-in-out 100ms,border-color ease-in-out 100ms;
-    border-radius: 3px;
-    font-weight: 500;
-    outline: 0;
-    text-align: center;
-    cursor: pointer;
-    background: #3e78ad;
-    color: #fff;
-    border: 1px solid #3a66ad;
-    box-shadow: 0 1px 1px 0 rgba(200,200,200,0.6);
 }

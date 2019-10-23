@@ -21,7 +21,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('homepage/',views.landing),
-    path("logout",views.pagelogout,name="pagelogout")
+    path('', views.index, name="index"),
+    path('homepage/', views.landing, name="homepage"),
+    path('logout', views.logout_page, name="logout"),
+    path('question/<int:id>/', views.question, name='question')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
