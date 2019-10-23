@@ -40,17 +40,14 @@ textarea {
 }
 
 .Posts {
-    display: flex;
     margin: 2em auto;
     margin-top: 0;
 }
 
 .Post {
-    display: inline-block;
-    width: 20em;
     background: white;
     padding: 2em;
-    margin-right: 1em;
+    margin-bottom: 1em;
     box-shadow: 0 18px 25px -25px rgba(0,0,0,.1);
     height: 100%;
     border-radius: 0.25em;

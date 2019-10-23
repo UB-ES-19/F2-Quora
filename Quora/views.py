@@ -68,7 +68,7 @@ def logout_page(request):
 
 
 def landing(request):
-    context = {'list': Post.objects.all()}
+    context = {'list': Post.objects.all().order_by('-id')}
     if request.method == "POST":
         post = PostForm(request.POST)
         try:
