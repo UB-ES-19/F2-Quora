@@ -1,0 +1,243 @@
+.modal_overlay {
+    font-size: 15px;
+    line-height: 1.4;
+    animation: fadeIn 100ms ease-out 0s 1 normal forwards;
+    background: rgba(0,0,0,0.65);
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1400;
+    display: flex;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.modal_overlay .modal_wrapper.normal {
+    width: 620px;
+}
+
+.modal_overlay .modal_wrapper {
+    position: relative;
+    margin: auto;
+}
+
+.normal {
+    font-weight: normal;
+}
+
+.AskQuestionStep {
+    height: 630px;
+    margin: 32px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Modal {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.AskQuestionStep .modal_content {
+    padding: 32px 32px 24px 32px;
+    min-height: 280px;
+}
+
+.AskQuestionStep .modal_content_tabs {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.Modal .modal_header {
+    position: relative;
+    border-bottom: 1px solid #e2e2e2;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.Modal .modal_content {
+    position: relative;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.Modal .modal_header,
+.Modal .modal_content,
+.Modal .modal_content .modal_body {
+    background-color: #fff;
+}
+
+.Modal .modal_header::before,
+.Modal .modal_content::before,
+.Modal .modal_content .modal_body::before,
+.Modal .modal_header::after,
+.Modal .modal_content::after,
+.Modal .modal_content .modal_body::after {
+    display: table;
+    content: "";
+}
+
+.Modal .modal_header .modal_close {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+}
+
+.Modal .modal_header {
+    background: #fafafa;
+    border-bottom: 1px solid #e2e2e2;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    width: 100%;
+}
+
+.Modal .modal_content {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.Modal .tabs_header .tab:first-child {
+    border-top-left-radius: 3px;
+}
+
+.Modal .tabs_header .selected {
+    font-weight: 500;
+    text-align: center;
+    overflow: hidden;
+    padding: 16px 32px;
+    color: #468e9d;
+    border-bottom: 1.5px solid #468e9d;
+    float: left;
+}
+
+.ui_button--FlatStyle.ui_button--size_regular.ui_button--icon_only {
+    padding: 7px !important;
+}
+
+.u-font-weight--medium {
+    font-weight: 500 !important;
+}
+
+.u-sans-font-main--large {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.u-margin-bottom--xs {
+    margin-bottom: 4px !important;
+}
+
+.u-flex-align--center {
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+}
+
+.u-flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+.u-margin-bottom--sm {
+    margin-bottom: 8px !important;
+}
+
+.ui_icon {
+    display: inline-block;
+    line-height: 0;
+    vertical-align: text-bottom;
+}
+
+.ui_icon_size--small svg {
+    width: 16px;
+    height: 16px;
+}
+
+.u-margin-left--sm {
+    margin-left: 8px !important;
+}
+
+.ui_icon_color--blue .icon_svg-stroke {
+    stroke:#468e9d
+}
+
+.ui_icon_color--blue .icon_svg-fill_as_stroke {
+    fill:#468e9d
+}
+
+.ui_icon_color--blue.ui_icon_outline--filled .icon_svg-fill {
+    fill:#468e9d
+}
+
+.u-margin-bottom--md {
+    margin-bottom: 16px !important;
+}
+
+.u-border-bottom {
+    border-width: 1px;
+    border-color: #e2e2e2;
+    border-radius: 0;
+    border-bottom-style: solid;
+}
+
+.AskQuestionStep .ask_modal_header {
+    margin-bottom: 8px;
+}
+
+.u-flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+.AskQuestionStep .ask_modal_header .user_asks_header {
+    color: #949494;
+    font-size: 15px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.AskQuestionStep .ask_modal_header .user_asks_header .user_action {
+    vertical-align: -3px;
+    margin-right: 8px;
+}
+
+.Selector .selector_input_interaction .selector_input {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+    padding-right: 23px;
+    resize: none;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-weight: bold;
+    line-height: 1.3;
+    color: #333;
+    font-size: 18px;
+    margin-top: 8px;
+    border: 0;
+    box-shadow: none;
+    padding-bottom: 8px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    height: 31px;
+}
+
+.Modal .modal_footer {
+    background: #fafafa;
+    border-radius: 0 0 4px 4px;
+    padding: 10px;
+    border-top: 1px solid #e2e2e2;
+    overflow: hidden;
+}
+
+.Modal .modal_footer .modal_actions {
+    float: right;
+}

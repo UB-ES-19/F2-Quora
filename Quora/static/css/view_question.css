@@ -1,0 +1,143 @@
+html {
+    height: 100%;
+    font-weight: 400;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+body {
+    font-family: 'Overpass';
+}
+
+* {
+  box-sizing: border-box;
+}
+/* Create columns */
+.column {
+    float: left;
+    padding: 10px;
+
+}
+
+.aux {
+    width: 30%;
+
+}
+
+.main {
+    width: 70%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.line{
+
+    height: 10px;
+    border-top: 1px solid #aaa;
+    position: absolute;
+    width: 70%
+}
+
+.question_title{
+
+    font-size: 30px;
+    text-decoration: bold;
+    margin-bottom:0px;
+}
+
+
+.date{
+    font-size: 13px;
+    color: #b3b3b3;
+}
+
+.subtitle{
+    font-size: 18px;
+    color: #595959
+}
+
+.related{
+
+    color: #595959;
+    font-size: 18px;
+}
+
+.actions {
+    width: 100%;
+    background-color: #FFF;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.actions a {
+    float: left;
+    padding: 12px;
+    color: #595959;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.actions a:hover {
+    background-color: #e8e8e8;
+}
+.container{
+    margin-left: 20px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo {
+    font-size: 36px;
+    font-weight: 600;
+    color: #468e9d;
+    background: -webkit-linear-gradient(to right, #4CA1AF, #468e9d);
+    background: linear-gradient(to right, #4CA1AF, #468e9d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header {
+    padding: 2em;
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.header div {
+    display: inline-block;
+}
+
+.user-overview {
+    position: absolute;
+    right: 2em;
+}
+
+.welcome {
+    margin-right: 1em;
+}
+
+.button {
+    padding: .5em 1em;
+    background: -webkit-linear-gradient(to right, #4CA1AF, #468e9d);
+    background: linear-gradient(to right, #4CA1AF, #468e9d);
+    color: white;
+    border-radius: .2em;
+}
+
+.button.ghost {
+    background: transparent;
+    color: #468e9d;
+}
+
+.answer-input {
+    width: 100%;
+    resize: none;
+}
