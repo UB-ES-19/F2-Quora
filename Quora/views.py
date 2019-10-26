@@ -2,15 +2,17 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm
+from .forms import RegistrationForm, Post, PostForm, AnswerForm
+from Quora.models import Answer
+
 
 def index(request, *args, **kwards):
     # We put both here as both sign up and login have to be in same page/view
-    #logout(request)
+    # logout(request)
     if request.method == "GET":
         form_signup = RegistrationForm()
         form_login = AuthenticationForm()
@@ -22,10 +24,11 @@ def index(request, *args, **kwards):
 
             if form_signup.is_valid():
                 form_signup.save()
-                form_signup.clean()
-                form_signup = RegistrationForm()
-                return render(request, 'index.html')
-                # redirect somewhere OR show something
+                username = form_signup.cleaned_data.get('email')
+                password = form_signup.cleaned_data.get('password')
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                return redirect('/homepage/')
 
         elif request.POST.get("submit") == "login":
             form_signup = RegistrationForm()
@@ -47,7 +50,7 @@ def index(request, *args, **kwards):
                     print("\t[DEBUG] user: ", user.email)
                     print(user)
                     login(request, user)
-                    return render(request, 'index.html')
+                    return redirect('/homepage/')
 
                 form_login = AuthenticationForm()
 
@@ -58,12 +61,40 @@ def index(request, *args, **kwards):
 
     return render(request, 'auth.html', context)
 
-def pagelogout(request):
-    form_signup = RegistrationForm()
-    form_login = AuthenticationForm()
-    context = {
-        'form_signup': form_signup,
-        'form_login': form_login
-    }
+
+def logout_page(request):
     logout(request)
     return redirect('/')
+
+
+def landing(request):
+    context = {'list': Post.objects.all().order_by('-id')}
+    if request.method == "POST":
+        post = PostForm(request.POST)
+        try:
+            post.save()
+        except:
+            context['error'] = 'Please enter a question!'
+
+    if not request.user.is_authenticated:
+        return redirect('/')
+    return render(request, 'index.html', context)
+
+
+def question(request, id):
+    post = Post.objects.get(id=id)
+    answers = Answer.objects.filter(original_post=id)
+
+    context = {
+        'post': post,
+        'answers': answers,
+        'answer_form': AnswerForm()
+    }
+
+    if request.method == 'POST':
+        answer = AnswerForm(request.POST)
+        try:
+            answer.save()
+        except:
+            context['error'] = 'Please enter an answer!'
+    return render(request, 'view_question.html', context)

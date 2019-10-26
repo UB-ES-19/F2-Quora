@@ -1,5 +1,9 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth import get_user_model
 from django.db import models
+from datetime import datetime
+import logging
+
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -45,3 +49,21 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+
+class Post(models.Model):
+    """Post model."""
+    id = models.AutoField(primary_key=True)
+    date = models.DateTimeField(default=datetime.now)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    question = models.TextField()
+
+
+class Answer(models.Model):
+    """Answer model"""
+    id = models.AutoField(primary_key=True)
+    date = models.DateTimeField(default=datetime.now)
+    original_post = models.ForeignKey(
+        Post, null=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    content = models.TextField()
