@@ -6,11 +6,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm,Post , PostForm
+from .forms import RegistrationForm, Post, PostForm, AnswerForm
+from Quora.models import Answer
+
 
 def index(request, *args, **kwards):
     # We put both here as both sign up and login have to be in same page/view
-    #logout(request)
+    # logout(request)
     if request.method == "GET":
         form_signup = RegistrationForm()
         form_login = AuthenticationForm()
@@ -59,16 +61,40 @@ def index(request, *args, **kwards):
 
     return render(request, 'auth.html', context)
 
-def pagelogout(request):
+
+def logout_page(request):
     logout(request)
     return redirect('/')
 
+
 def landing(request):
-    context = { 'list' : Post.objects.all() }
+    context = {'list': Post.objects.all().order_by('-id')}
     if request.method == "POST":
         post = PostForm(request.POST)
-        post.save()
+        try:
+            post.save()
+        except:
+            context['error'] = 'Please enter a question!'
 
     if not request.user.is_authenticated:
         return redirect('/')
-    return render(request, 'index.html',context)
+    return render(request, 'index.html', context)
+
+
+def question(request, id):
+    post = Post.objects.get(id=id)
+    answers = Answer.objects.filter(original_post=id)
+
+    context = {
+        'post': post,
+        'answers': answers,
+        'answer_form': AnswerForm()
+    }
+
+    if request.method == 'POST':
+        answer = AnswerForm(request.POST)
+        try:
+            answer.save()
+        except:
+            context['error'] = 'Please enter an answer!'
+    return render(request, 'view_question.html', context)

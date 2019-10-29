@@ -1,21 +1,13 @@
-<style>
-
 html {
     height: 100%;
     font-weight: 400;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     font-size: 15px;
     line-height: 1.4;
-    background-color: #aaa;
 }
 
-.NetworkLogo {
-    width: 224px;
-    min-width: 224px;
-    background: url('../images/logo_wordmark_default.svg') no-repeat center center;
-    margin: auto;
-    height: 82px;
-    position: relative;
+body {
+    font-family: 'Overpass';
 }
 
 * {
@@ -102,5 +94,50 @@ html {
     overflow: hidden;
 }
 
+.logo {
+    font-size: 36px;
+    font-weight: 600;
+    color: #468e9d;
+    background: -webkit-linear-gradient(to right, #4CA1AF, #468e9d);
+    background: linear-gradient(to right, #4CA1AF, #468e9d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-</style>
+.header {
+    padding: 2em;
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.header div {
+    display: inline-block;
+}
+
+.user-overview {
+    position: absolute;
+    right: 2em;
+}
+
+.welcome {
+    margin-right: 1em;
+}
+
+.button {
+    padding: .5em 1em;
+    background: -webkit-linear-gradient(to right, #4CA1AF, #468e9d);
+    background: linear-gradient(to right, #4CA1AF, #468e9d);
+    color: white;
+    border-radius: .2em;
+}
+
+.button.ghost {
+    background: transparent;
+    color: #468e9d;
+}
+
+.answer-input {
+    width: 100%;
+    resize: none;
+}
