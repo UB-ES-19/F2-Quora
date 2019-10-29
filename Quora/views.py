@@ -98,3 +98,6 @@ def question(request, id):
         except:
             context['error'] = 'Please enter an answer!'
     return render(request, 'view_question.html', context)
+
+def about(request):
+    return render(request,'about.html')
