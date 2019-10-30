@@ -4,78 +4,78 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{% static "css/auth.css" %}"/>
     <link rel="icon" href="https://qsf.fs.quoracdn.net/-3-images.favicon.ico-26-ae77b637b1e7ed2c.ico">
-    <title>Quora - Un lugar para compartir conocimiento y entender mejor el mundo</title>
+    <title>Quora - A place to share knowledge and better understand the world</title>
 </head>
 
 <body>
-    <div class="HomePageSignupLogin">
-        <div class="NetworkLogo">
-            <div class="network_stage">
-                <span class="network">⁠ Español</span>
+    <div class="home-page-signup-login">
+        <div class="network-logo">
+            <div class="network-stage">
+                <span class="network">⁠ English</span>
             </div>
         </div>
-        <h2 class="tagline">Un lugar para compartir conocimiento y entender mejor el mundo</h2>
+        <h2 class="tagline">A place to share knowledge and better understand the world</h2>
         <div class="container">
-            <div class="content_inner">
-                <div class="signup_login">
+            <div class="content-inner">
+                <div class="signup-login">
                     <div class="signup">
-                        <div class="title">Registrarse</div>
-                        <div class="EmailSignUp">
+                        <div class="title">Sign up</div>
+                        <div class="email-signup">
                             <form action="" method="POST">
                                 {% csrf_token %}
                                 {{ form_signup.non_field_errors }}
-                                <div class="firstLastNameGroup">
-                                    <div class="form_row half">
-                                        <div class="fieldWrapper">
+
+                                    <div class="form-row half">
+
                                             {{ form_signup.first_name.errors }}
-                                            <label class="label_register" for="{{ form_signup.first_name.id_for_label }}">NOMBRE</label>
-                                            {{ form_signup.first_name | addclass:'register_input' }}
-                                        </div>
+                                            <label class="label-register" for="{{ form_signup.first_name.id_for_label }}">FIRST NAME</label>
+                                            {{ form_signup.first_name | addclass:'register-input' }}
+
                                     </div>
-                                    <div class="form_row half">
-                                        <div class="fieldWrapper">
+                                    <div class="form-row half">
+
                                             {{ form_signup.last_name.errors }}
-                                            <label class="label_register" for="{{ form_signup.last_name.id_for_label }}">APELLIDO(S)</label>
-                                            {{ form_signup.last_name | addclass:'register_input' }}
-                                        </div>
+                                            <label class="label-register" for="{{ form_signup.last_name.id_for_label }}">LAST NAME</label>
+                                            {{ form_signup.last_name | addclass:'register-input' }}
+
                                     </div>
-                                </div>
-                                <div class="form_row">
-                                    <div class="fieldWrapper">
+
+                                <div class="form-row">
+
                                         {{ form_signup.email.errors }}
-                                        <label class="label_register" for="{{ form_signup.email.id_for_label }}">CORREO ELECTRÓNICO</label>
-                                        {{ form_signup.email | addclass:'register_input' }}
-                                    </div>
+                                        <label class="label-register" for="{{ form_signup.email.id_for_label }}">E-MAIL</label>
+                                        {{ form_signup.email | addclass:'register-input' }}
+
                                 </div>
-                                <div class="form_row">
-                                    <div class="fieldWrapper">
+                                <div class="form-row">
+
                                         {{ form_signup.password.errors }}
-                                        <label class="label_register" for="{{ form_signup.password.id_for_label }}">CONTRASEÑA</label>
-                                        {{ form_signup.password | addclass:'register_input' }}
-                                    </div>
+                                        <label class="label-register" for="{{ form_signup.password.id_for_label }}">PASSWORD</label>
+                                        {{ form_signup.password | addclass:'register-input' }}
+
                                 </div>
-                            <button type="submit" name="submit" value="signup">Registrarse</button>
+                            <button type="submit" name="submit" value="signup">Sign up</button>
                         </form>
                         </div>
                     </div>
                     <div class="login">
-                        <div class="title">Iniciar sesión</div>
+                        <div class="title">Log in</div>
                         <form action="" method="POST">
                             {% csrf_token %}
                             {{ form_login.non_field_errors }}
-                            <div class="form_row">
-                                <div class="fieldWrapper">
+                            <div class="form-row">
+
                                     {{ form_login.username.errors }}
-                                    {{ form_login.username | addclass:'login_input' }}
-                                </div>
+                                    {{ form_login.username | addclass:'login-input' }}
+
                             </div>
-                            <div class="form_row">
-                                <div class="fieldWrapper">
+                            <div class="form-row">
+
                                     {{ form_login.password.errors }}
-                                    {{ form_login.password | addclass:'login_input' }}
-                                </div>
+                                    {{ form_login.password | addclass:'login-input' }}
+
                             </div>
-                            <button type="submit" name="submit" value="login">Iniciar sesión</button>
+                            <button type="submit" name="submit" value="login">Log in</button>
                         </form>
 
                         {% if user.is_authenticated %}
