@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
 from .forms import RegistrationForm, Post, PostForm, AnswerForm
-from Quora.models import Answer
+from Quora.models import Answer,User
 
 
 def index(request, *args, **kwards):
@@ -76,6 +76,7 @@ def landing(request):
         except:
             context['error'] = 'Please enter a question!'
 
+
     if not request.user.is_authenticated:
         return redirect('/')
     return render(request, 'index.html', context)
@@ -95,9 +96,20 @@ def question(request, id):
         answer = AnswerForm(request.POST)
         try:
             answer.save()
+            #User.answers.append(answer)
+            #User.followers.append(answer.original_post.user)
         except:
             context['error'] = 'Please enter an answer!'
     return render(request, 'view_question.html', context)
 
 def about(request):
     return render(request,'about.html')
+
+def filtering():
+    #post_list=[]
+    #for post in Post.object.all():
+    #if post.user.email in request.user.followers:
+    #post_list.append(post)
+    #return post_list
+    return Post.objects.all()
+
