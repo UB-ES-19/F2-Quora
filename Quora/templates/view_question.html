@@ -51,7 +51,7 @@
         <input type="hidden" name="original_post" value="{{post.id}}">
         {% csrf_token %}
         {{ answer_form.content | addclass:'answer-input' }}
-        <input type="submit" class="button">
+          <button type="submit" class="button" name="submit" value="addAnswer">Add answer</button>
       </form>
 
     </div>

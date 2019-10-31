@@ -92,9 +92,18 @@ def question(request, id):
     }
 
     if request.method == 'POST':
-        answer = AnswerForm(request.POST)
-        try:
-            answer.save()
-        except:
-            context['error'] = 'Please enter an answer!'
+        if request.POST.get("submit") == "addAnswer":
+            answer = AnswerForm(request.POST)
+            try:
+                answer.save()
+            except:
+                context['error'] = 'Please enter an answer!'
+
+        elif request.POST.get("submit") == "addQuestion":
+            post = PostForm(request.POST)
+            try:
+                post.save()
+            except:
+                context['error'] = 'Please enter a question!'
+
     return render(request, 'view_question.html', context)

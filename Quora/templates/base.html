@@ -1,7 +1,10 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 
 <head>
+    <link rel="stylesheet" href="{% static 'css/modal_question.css' %}">
     <link rel="icon" href="https://qsf.fs.quoracdn.net/-3-images.favicon.ico-26-ae77b637b1e7ed2c.ico">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -51,10 +54,133 @@
         </div>
     </div>
     {% endblock header %}
+
+    <div class="modal" id="openQuestionModal">
+        <div class="modal_overlay">
+            <div class="modal_wrapper normal">
+                <div class="Step AskQuestionStep Modal">
+                    <div class="modal_header only_close_button">
+                        <div class="modal_close">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="tabs_header u-flex-inline u-flex-row">
+                            <div class="tab selected">Add Question</div>
+                        </div>
+                    </div>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <input type="hidden" name="user" value="{{ user.id }}">
+                        <div class="modal_content modal_content_tabs">
+                            <div>
+                                <div class="u-border-bottom u-margin-bottom--md u-padding-bottom--sm">
+                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--xs">
+                                        Tips on
+                                        getting good answers quickly</p>
+                                    <ul class="tip_list">
+                                        <div class="u-margin-bottom--sm u-flex u-flex-align--center">
+                                            <span
+                                                class="ui_icon ui_icon_color--blue ui_icon_size--small ui_icon_outline--default"
+                                                aria-hidden="true">
+                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <g fill="none" fill-rule="evenodd" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path class="icon_svg-stroke"
+                                                            d="M12,3 C16.971,3 21,7.029 21,12 C21,16.971 16.971,21 12,21 C7.029,21 3,16.971 3,12 C3,7.029 7.029,3 12,3 Z M8,12.6290909 L10.9090909,15.5381818 L16,9"
+                                                            stroke="#666666" stroke-width="1.5"></path>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                            <span class="u-margin-left--sm">Make sure your question hasn't been
+                                                asked
+                                                already</span>
+                                        </div>
+                                        <div class="u-margin-bottom--sm u-flex u-flex-align--center">
+                                            <span
+                                                class="ui_icon ui_icon_color--blue ui_icon_size--small ui_icon_outline--default"
+                                                aria-hidden="true">
+                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <g fill="none" fill-rule="evenodd" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path class="icon_svg-stroke"
+                                                            d="M12,3 C16.971,3 21,7.029 21,12 C21,16.971 16.971,21 12,21 C7.029,21 3,16.971 3,12 C3,7.029 7.029,3 12,3 Z M8,12.6290909 L10.9090909,15.5381818 L16,9"
+                                                            stroke="#666666" stroke-width="1.5"></path>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                            <span class="u-margin-left--sm">Keep your question short and to the
+                                                point</span>
+                                        </div>
+                                        <div class="u-margin-bottom--sm u-flex u-flex-align--center">
+                                            <span
+                                                class="ui_icon ui_icon_color--blue ui_icon_size--small ui_icon_outline--default"
+                                                aria-hidden="true">
+                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <g fill="none" fill-rule="evenodd" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path class="icon_svg-stroke"
+                                                            d="M12,3 C16.971,3 21,7.029 21,12 C21,16.971 16.971,21 12,21 C7.029,21 3,16.971 3,12 C3,7.029 7.029,3 12,3 Z M8,12.6290909 L10.9090909,15.5381818 L16,9"
+                                                            stroke="#666666" stroke-width="1.5"></path>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                            <span class="u-margin-left--sm">Double-check grammar and spelling</span>
+                                        </div>
+                                    </ul>
+                                </div>
+
+                                <div class="ask_modal_header u-flex">
+                                    <div class="user_asks_header">
+                                        {% if user.first_name != '' %}
+                                        <span class="user"> {{user.first_name}} {{user.last_name}} asked </span>
+                                        {% else %}
+                                        <span class="user"> {{user.email}} asked </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="AskQuestionSelector Selector" tabindex="-1">
+                                    <div class="selector_input_interaction">
+                                        <textarea class="selector_input" id="questionTextarea" name="question" rows="1" onkeyup="textAreaAdjust(this)"
+                                            title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."
+                                            data-group="js-editable"
+                                            placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal_footer">
+                            <div class="modal_actions">
+                                <span>
+                                    <a class="button ghost" data-dismiss="modal" aria-label="Close" href="">Cancel</a>
+                                </span>
+                                <span>
+                                    <button class="button" name="submit" value="addQuestion">Add Question</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {% block content %}{% endblock content %}
 
     <script>
         setTimeout(function () {$('#notification').addClass('hidden')}, 1500);
+
+        function textAreaAdjust(o) {
+          o.style.height = "1px";
+          o.style.height = (25+o.scrollHeight)+"px";
+        }
     </script>
 
 </body>
