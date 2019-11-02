@@ -46,14 +46,14 @@ class User(AbstractUser):
     email = models.EmailField(('email address'), unique=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
-
-    questions = []
-    answers = []
-    followers = []
+    REQUIRED_FIELDS = []
 
     objects = UserManager()
 
+class Follow(models.Model):
+    following = models.ManyToManyField(User)
+    follower = models.ForeignKey(User, null=True,on_delete=models.CASCADE,related_name="owner")
+    follow_time = models.DateTimeField(auto_now=True)
 
 class Post(models.Model):
     """Post model."""

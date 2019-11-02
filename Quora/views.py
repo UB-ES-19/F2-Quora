@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
 from .forms import RegistrationForm, Post, PostForm, AnswerForm
-from Quora.models import Answer,User
+from Quora.models import Answer,User, Follow
 
 
 def index(request, *args, **kwards):
@@ -28,6 +28,9 @@ def index(request, *args, **kwards):
                 password = form_signup.cleaned_data.get('password')
                 user = authenticate(username=username, password=password)
                 login(request, user)
+                followDB = Follow.objects.create()
+                followDB.follower = user
+                followDB.save()
                 return redirect('/homepage/')
 
         elif request.POST.get("submit") == "login":
@@ -68,7 +71,7 @@ def logout_page(request):
 
 
 def landing(request):
-    context = {'list': Post.objects.all().order_by('-id')}
+    context = {'list': filtering(request,Post.objects.all().order_by('-id'))}
     if request.method == "POST":
         post = PostForm(request.POST)
         try:
@@ -96,8 +99,6 @@ def question(request, id):
         answer = AnswerForm(request.POST)
         try:
             answer.save()
-            #User.answers.append(answer)
-            #User.followers.append(answer.original_post.user)
         except:
             context['error'] = 'Please enter an answer!'
     return render(request, 'view_question.html', context)
@@ -105,11 +106,18 @@ def question(request, id):
 def about(request):
     return render(request,'about.html')
 
-def filtering():
-    #post_list=[]
-    #for post in Post.object.all():
-    #if post.user.email in request.user.followers:
-    #post_list.append(post)
-    #return post_list
-    return Post.objects.all()
+
+def filtering(request,posts):
+    lista_post = []
+    current_user = None
+    for follow in Follow.objects.all():
+        if str(follow.follower) == str(request.user.email):
+            current_user = follow
+    if current_user == None:
+        return []
+    for post in posts:
+        if str(post.user.email) in str(current_user.following.all()):
+            lista_post.append(post)
+    return lista_post
+
 
