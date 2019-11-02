@@ -14,58 +14,58 @@
 
 {% block content %}
 <div class="container">
-
-        <div class="column main">
-            <div class="profile-info">
-                <div class="edit-profile">
+    <div class="column main">
+        <div class="profile-info">
+            <div class="edit-profile">
                 <a href="#" class="active"><i class="fa fa-fw fa-edit"></i>Edit profile</a>
-                </div>
-                <img class="profile-image" src="../static/images/profile_default.png" alt="Profile" width="150" height="150">
-                <br><br>
-                <div class="profile-text" >
+            </div>
+            <img class="profile-image" src="../static/images/profile_default.png" alt="Profile" width="150" height="150">
+            <br><br>
+            <div class="profile-text" >
                 <h2>{{user.first_name}} {{user.last_name}}</h2><br>
                 {% if user.description %}
                 <p> user.description </p>
                 {% else %}
                 <p>You haven't written your bio yet!</p>
                 {% endif %}
-                </div>
+            </div>
 
-                </div>
-           <div class="Content">
+        </div>
+        <div class="Content">
             <div class="row">
-                    <div class="column aux">
-                        <div class="vertical-menu-user">
-                          <a href="#" class="active">Questions</a>
-                          <a href="#">Answers</a>
-                          <a href="#">Following</a>
-                          <a href="#">Followers</a>
-
-                        </div>
+                <div class="column aux">
+                    <div class="vertical-menu-user">
+                      <a href="#" class="active">Questions</a>
+                      <a href="#">Answers</a>
+                      <a href="#">Following</a>
+                      <a href="#">Followers</a>
                     </div>
-            <div class="column main">
-                <div class="Posts">
-                    </div><h5>Your Posts</h5>
-                    {% if user.questions %}
-                    {% for post in user.questions %}
-                    <a href="{% url 'question' id=post.id %}">
-                        <div class="Post">
-                            <div class="PostMeta">
-                                <div class="PostDate">{{post.date}}</div>
-                                <div class="PostUser"><b>{{post.user.first_name}} {{post.user.last_name}}</b> asks:</div>
+                </div>
+                <div class="column main">
+                    <div class="Posts">
+                        <h5>Your Posts</h5>
+                        {% if user.questions %}
+                        {% for post in user.questions %}
+                        <a href="{% url 'question' id=post.id %}">
+                            <div class="Post">
+                                <div class="PostMeta">
+                                    <div class="PostDate">{{post.date}}</div>
+                                    <div class="PostUser"><b>{{post.user.first_name}} {{post.user.last_name}}</b> asks:</div>
+                                </div>
+                                <div class="PostTitle">{{post.question}}?</div>
                             </div>
-                            <div class="PostTitle">{{post.question}}?</div>
-                        </div>
-                    </a>
-                    {% endfor %}
-                    {% else %}
-                    <div class="line main"></div><br>
-                    <p>You haven't posted anything yet!</p>
-                    {% endif %}
-
+                        </a>
+                        {% endfor %}
+                        {% else %}
+                        <div class="line main"></div><br>
+                        <p>You haven't posted anything yet!</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
 
 
