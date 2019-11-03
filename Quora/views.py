@@ -71,7 +71,7 @@ def logout_page(request):
 
 
 def landing(request):
-    context = {'list': filtering(request,Post.objects.all().order_by('-id'))}
+    context = {'list': filtering(request,Post.objects.all().order_by('-id')),'username':request.user.email}
     if request.method == "POST":
         post = PostForm(request.POST)
         try:
@@ -102,6 +102,17 @@ def question(request, id):
         except:
             context['error'] = 'Please enter an answer!'
     return render(request, 'view_question.html', context)
+
+def profile(request,username):
+    current_user = None
+    for user in User.objects.all():
+        if str(user.email) == str(username):
+            current_user = user
+
+    if current_user == None:
+        return redirect('/')
+    context = {'username': username}
+    return render(request, 'profile.html', context)
 
 def about(request):
     return render(request,'about.html')
