@@ -107,3 +107,6 @@ def question(request, id):
                 context['error'] = 'Please enter a question!'
 
     return render(request, 'view_question.html', context)
+
+def about(request):
+    return render(request,'about.html')
