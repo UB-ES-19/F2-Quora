@@ -36,6 +36,8 @@
                 Quokka
             </div>
         </a>
+
+        <a href="{% url 'profile' username=username %}">
         <div class="user-overview">
             <div class="welcome">
                 {% if user.first_name != '' %}
