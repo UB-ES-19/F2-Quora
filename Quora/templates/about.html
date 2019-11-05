@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <p1>ABOUT PAGE</p1>
-</body>
-</html>
+{% extends "base.html" %}
+{% load filters %}
+{% load static %}
+
+{% block extrahead %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<title>About - Quokka</title>
+
+{% endblock extrahead %}
+
+{% block content %}
+<div class="container">
+    <div class="column main">
+        <div class="about-text">
+            <br>
+            <h2 class="about-title">Why Quokka exists</h2>
+            <p>Quokka’s mission is to share and grow the world’s knowledge. We want to connect the people who have knowledge to the people who need it, to bring together people with different perspectives so they can understand each other better. <br>
+                That way, we want to empower everyone to share their knowledge for the benefit of the rest of the world. A place to have all questions answered and to help others. </p>
+            <br>
+            <h2 class="about-title">Gather around a Question</h2>
+            <p>The heart of Quokka is questions. When people don’t know something, they ask. Here you can ask your questions to the diverse Quokka community— questions that affect the world, questions that guide important life decisions, and questions that provide insights into why other people think differently. </p>
+            <p class="highlight">Quokka is a place where you can ask questions you care about and get answers that are amazing.</p>
+            <img class="about-image" src="{% static "images/about-image.jpg" %}" alt="About Quokka">
+            <p>Quokka has only one version of each question. It brings together people from different worlds to answer the same question, in the same place — and to learn from each other. We want Quokka to be the place to voice your opinion because Quokka is where the debate is happening. We want the Quokka answer to be the definitive answer for everybody forever, and only other users can determine how good and useful one answer is.</p>
+            <br>
+            <h2 class="about-title">Understand The World and The People In It</h2>
+            <p>Quokka has content you will feel good about having read. Quokka helps you understand why the world works the way it does, why people behave the way they do, and what we can all do to make the world better. Quokka provides a personalized feed of insightful answers to questions you hadn’t realized you should ask. Select your areas of interest, follow the most relevant users and we’ll make a Quokka experience just for you.</p>
+            <p>Quokka is where you can read important insights that have never been shared anywhere else, from people you could never reach any other way. So go ahead and join us! Start asking the things that you care about and help others with insightful answers. </p>
+            <p class="highlight">Quokka is for people exactly like you.</p>
+            <br>
+            <img class="about-image" src="{% static "images/about-ending-image.jpg" %}" alt="About Quokka">
+            <br><br>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
