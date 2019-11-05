@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
 from .forms import RegistrationForm, Post, PostForm, AnswerForm
-from Quora.models import Answer,User, Follow
+from Quora.models import Answer, User, Follow
 
 
 def index(request, *args, **kwards):
@@ -71,14 +71,14 @@ def logout_page(request):
 
 
 def landing(request):
-    context = {'list': filtering(request,Post.objects.all().order_by('-id')),'username':request.user.email}
+    context = {'list': filtering(request, Post.objects.all().order_by(
+        '-id')), 'username': request.user.email}
     if request.method == "POST":
         post = PostForm(request.POST)
         try:
             post.save()
         except:
             context['error'] = 'Please enter a question!'
-
 
     if not request.user.is_authenticated:
         return redirect('/')
@@ -103,7 +103,8 @@ def question(request, id):
             context['error'] = 'Please enter an answer!'
     return render(request, 'view_question.html', context)
 
-def profile(request,username):
+
+def profile(request, username):
     current_user = None
     for user in User.objects.all():
         if str(user.email) == str(username):
@@ -114,11 +115,12 @@ def profile(request,username):
     context = {'username': username}
     return render(request, 'profile.html', context)
 
+
 def about(request):
-    return render(request,'about.html')
+    return render(request, 'about.html')
 
 
-def filtering(request,posts):
+def filtering(request, posts):
     lista_post = []
     current_user = None
     for follow in Follow.objects.all():
@@ -130,5 +132,3 @@ def filtering(request,posts):
         if str(post.user.email) in str(current_user.following.all()):
             lista_post.append(post)
     return lista_post
-
-
