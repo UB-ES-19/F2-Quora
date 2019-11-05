@@ -11,7 +11,8 @@ class RegistrationForm(forms.ModelForm):
         strip=False,
         widget=forms.PasswordInput
     )
-
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
     class Meta:
         model = User
         fields = [
@@ -40,7 +41,6 @@ class PostForm(forms.ModelForm):
             'user',
             'question'
         ]
-
     def save(self, commit=True):
         post = super().save(commit=False)
         post.question = self.cleaned_data['question']
