@@ -49,7 +49,7 @@
 
         <div class="user-overview">
             <div class="welcome">
-                <a href="{% url 'profile' username=username %}">
+                <a class="text-link ghost" href="{% url 'profile' username=username %}">
                     {% if user.first_name != '' %}
                     Welcome, <b>{{user.first_name}} {{user.last_name}}</b>!
                     {% else %}

@@ -131,8 +131,13 @@ textarea {
     margin: auto;
 }
 
+.text-link {
+    color: #444;
+}
+
 .item-header.ghost,
-.item-footer.ghost {
+.item-footer.ghost,
+.text-link.ghost {
     background: transparent;
     color: #444 !important;
 }
