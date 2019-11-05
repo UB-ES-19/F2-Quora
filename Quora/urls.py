@@ -25,5 +25,6 @@ urlpatterns = [
     path('homepage/', views.landing, name="homepage"),
     path('logout', views.logout_page, name="logout"),
     path('question/<int:id>/', views.question, name='question'),
-    path('about/',views.about,name="about")
+    path('about/',views.about,name="about"),
+    path('profile/<username>/',views.profile,name="profile")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

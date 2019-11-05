@@ -50,6 +50,10 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+class Follow(models.Model):
+    following = models.ManyToManyField(User)
+    follower = models.ForeignKey(User, null=True,on_delete=models.CASCADE,related_name="owner")
+    follow_time = models.DateTimeField(auto_now=True)
 
 class Post(models.Model):
     """Post model."""
