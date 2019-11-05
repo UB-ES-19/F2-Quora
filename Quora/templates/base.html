@@ -49,11 +49,13 @@
 
         <div class="user-overview">
             <div class="welcome">
-                {% if user.first_name != '' %}
-                Welcome, <b>{{user.first_name}} {{user.last_name}}</b>!
-                {% else %}
-                Welcome, <b>{{user.email}}</b>!
-                {% endif %}
+                <a href="{% url 'profile' username=username %}">
+                    {% if user.first_name != '' %}
+                    Welcome, <b>{{user.first_name}} {{user.last_name}}</b>!
+                    {% else %}
+                    Welcome, <b>{{user.email}}</b>!
+                    {% endif %}
+                </a>
             </div>
             <button id="new-post-button" class="button" data-toggle="modal" data-target="#openQuestionModal">
                 Ask a question
