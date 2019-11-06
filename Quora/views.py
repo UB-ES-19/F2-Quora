@@ -144,8 +144,12 @@ def about(request):
 def filtering(request, posts):
     following = []
 
-    follows = Follow.objects.get(follower=request.user)
-    following = [f.email for f in follows.following.all()]
-    posts = Post.objects.filter(user__email__in=following).order_by('-id')
+    try:
+        follows = Follow.objects.get(follower=request.user)
+        following = [f.email for f in follows.following.all()]
+        posts = Post.objects.filter(user__email__in=following).order_by('-id')
+    except:
+        # User is following no one. Return empty list.
+        posts = []
 
     return posts
