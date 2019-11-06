@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm, Post, PostForm, AnswerForm
+from .forms import RegistrationForm, Post, PostForm, AnswerForm, PersonalInfoForm
 from Quora.models import Answer, User, Follow
 
 
@@ -119,9 +119,13 @@ def profile(request, username):
         if str(user.email) == str(username):
             current_user = user
 
+    posts = Post.objects.filter(user=current_user)
+
     if current_user == None:
         return redirect('/')
-    context = {'username': username}
+    context = {'username': username,
+               'posts': posts,
+               'form': PersonalInfoForm(instance=current_user)}
     return render(request, 'profile.html', context)
 
 

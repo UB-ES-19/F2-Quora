@@ -13,6 +13,7 @@ class RegistrationForm(forms.ModelForm):
     )
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
+
     class Meta:
         model = User
         fields = [
@@ -41,6 +42,7 @@ class PostForm(forms.ModelForm):
             'user',
             'question'
         ]
+
     def save(self, commit=True):
         post = super().save(commit=False)
         post.question = self.cleaned_data['question']
@@ -67,3 +69,26 @@ class AnswerForm(forms.ModelForm):
             answer.save()
 
         return answer
+
+
+class PersonalInfoForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+            'photo',
+            'description'
+        ]
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.photo = self.cleaned_data['photo']
+        user.description = self.cleaned_data['description']
+        if commit:
+            user.save()
+
+        return user
