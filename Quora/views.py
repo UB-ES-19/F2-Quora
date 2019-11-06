@@ -96,11 +96,20 @@ def question(request, id):
     }
 
     if request.method == 'POST':
-        answer = AnswerForm(request.POST)
-        try:
-            answer.save()
-        except:
-            context['error'] = 'Please enter an answer!'
+        if request.POST.get("submit") == "addAnswer":
+            answer = AnswerForm(request.POST)
+            try:
+                answer.save()
+            except:
+                context['error'] = 'Please enter an answer!'
+
+        elif request.POST.get("submit") == "addQuestion":
+            post = PostForm(request.POST)
+            try:
+                post.save()
+            except:
+                context['error'] = 'Please enter a question!'
+
     return render(request, 'view_question.html', context)
 
 
@@ -117,7 +126,9 @@ def profile(request, username):
 
 
 def about(request):
-    return render(request, 'about.html')
+    context = {
+        'username': request.user.email if request.user.is_authenticated else 'anonymous'}
+    return render(request, 'about.html', context)
 
 
 def filtering(request, posts):
