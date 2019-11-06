@@ -5,6 +5,7 @@
 
 <head>
     <link rel="stylesheet" href="{% static 'css/modal_question.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="icon" href="https://qsf.fs.quoracdn.net/-3-images.favicon.ico-26-ae77b637b1e7ed2c.ico">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -31,8 +32,10 @@
     <div class="notification">
 
     </div>
+
     {% endblock %}
     {% block header %}
+
     <div class="header">
         <a href="{% url 'homepage' %}">
             <div class="logo">
@@ -40,14 +43,19 @@
             </div>
         </a>
 
-        <a href="{% url 'profile' username=username %}">
+        <a class="item-header ghost" href="{% url 'about' %}">
+            About Quokka
+        </a>
+
         <div class="user-overview">
             <div class="welcome">
-                {% if user.first_name != '' %}
-                Welcome, <b>{{user.first_name}} {{user.last_name}}</b>!
-                {% else %}
-                Welcome, <b>{{user.email}}</b>!
-                {% endif %}
+                <a class="text-link ghost" href="{% url 'profile' username=username %}">
+                    {% if user.first_name != '' %}
+                    Welcome, <b>{{user.first_name}} {{user.last_name}}</b>!
+                    {% else %}
+                    Welcome, <b>{{user.email}}</b>!
+                    {% endif %}
+                </a>
             </div>
             <button id="new-post-button" class="button" data-toggle="modal" data-target="#openQuestionModal">
                 Ask a question
@@ -175,6 +183,12 @@
     </div>
 
     {% block content %}{% endblock content %}
+
+    <div class="base-footer">
+        <a class="item-footer ghost" href="{% url 'about' %}">
+            About Quokka
+        </a>
+    </div>
 
     <script>
         setTimeout(function () {$('#notification').addClass('hidden')}, 1500);

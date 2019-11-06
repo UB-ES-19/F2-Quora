@@ -6,13 +6,8 @@ html {
     line-height: 1.4;
 }
 
-body {
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    color: #333;
+body > div {
     font-size: 13px;
-    background-color: rgb(250, 250, 250);
     font-family: 'Overpass';
 }
 
@@ -31,6 +26,11 @@ h1, h2, h3, h4, h5, h6, ul, ol, li {
 
 textarea {
     resize: none;
+}
+
+.Posts {
+    width: 75%;
+    margin: 0 auto;
 }
 
 .Post {
@@ -116,4 +116,48 @@ textarea {
 
 #notification.error.hidden {
     transform: translateY(50px);
+}
+
+.item-header {
+    color: #444;
+    opacity: .5;
+    margin-top: 1em;
+    margin-left: 3em;
+}
+
+.item-footer {
+    color: #444;
+    opacity: .5;
+    margin: auto;
+}
+
+.text-link {
+    color: #444;
+}
+
+.item-header.ghost,
+.item-footer.ghost,
+.text-link.ghost {
+    background: transparent;
+    color: #444 !important;
+}
+
+.base-footer::before {
+    display: table;
+    content: "";
+}
+
+.base-footer {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-top: 1px solid #e2e2e2;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
