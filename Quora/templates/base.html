@@ -35,7 +35,7 @@
 
     {% endblock %}
     {% block header %}
-
+    {% if user.is_authenticated %}
     <div class="header">
         <a href="{% url 'homepage' %}">
             <div class="logo">
@@ -63,6 +63,9 @@
             <a href="{% url 'logout' %}" class="button ghost">Log out</a>
         </div>
     </div>
+    {% else %}
+    <div style="height: 5em"></div>
+    {% endif %}
     {% endblock header %}
 
     <div class="modal" id="openQuestionModal">
@@ -158,7 +161,8 @@
                                 </div>
                                 <div class="AskQuestionSelector Selector" tabindex="-1">
                                     <div class="selector_input_interaction">
-                                        <textarea class="selector_input" id="questionTextarea" name="question" rows="1" onkeyup="textAreaAdjust(this)"
+                                        <textarea class="selector_input" id="questionTextarea" name="question" rows="1"
+                                            onkeyup="textAreaAdjust(this)"
                                             title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."
                                             data-group="js-editable"
                                             placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
@@ -194,8 +198,8 @@
         setTimeout(function () {$('#notification').addClass('hidden')}, 1500);
 
         function textAreaAdjust(o) {
-          o.style.height = "1px";
-          o.style.height = (25+o.scrollHeight)+"px";
+            o.style.height = "1px";
+            o.style.height = (25 + o.scrollHeight) + "px";
         }
     </script>
 
