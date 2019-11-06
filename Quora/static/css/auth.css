@@ -25,7 +25,7 @@ div {
     font-weight: bold;
 }
 
-.HomePageSignupLogin {
+.home-page-signup-login {
     background: #fff;
     border: 1px solid #e2e2e2;
     box-shadow: 0 0 5px #888;
@@ -41,7 +41,7 @@ div {
     top: 10%;
 }
 
-.NetworkLogo {
+.network-logo {
     width: 224px;
     min-width: 224px;
     background: url('../images/logo_wordmark_default.svg') no-repeat center center;
@@ -50,7 +50,7 @@ div {
     position: relative;
 }
 
-.network_stage {
+.network-stage {
     position: absolute;
     right: 7px;
     bottom: 0;
@@ -73,12 +73,12 @@ div {
     overflow: hidden;
 }
 
-.content_inner {
+.content-inner {
     padding: 32px;
     overflow: hidden;
 }
 
-.signup_login {
+.signup-login {
     position: relative;
     margin-bottom: 5px;
     overflow: hidden;
@@ -111,25 +111,25 @@ div {
     overflow: hidden
 }
 
-.EmailSignUp {
+.email-signup {
     margin-top: 8px;
     overflow: hidden
 }
 
-.form_row.half {
+.form-row.half {
     width: 49%;
     float: left;
 }
 
-.form_row:last-child {
+.form-row:last-child {
     padding-left: 4px;
 }
 
-.form_row {
+.form-row {
     padding: 0 0 8px;
 }
 
-.form_row:after {
+.form-row:after {
     clear: both;
 }
 
@@ -146,7 +146,7 @@ button {
     line-height: 1.4;
 }
 
-.login_input {
+.login-input {
     display: block;
     background-color: #EEE;
     border: 1px solid #ccc;
@@ -165,7 +165,7 @@ button {
     margin-bottom: 8px;
 }
 
-.register_input {
+.register-input {
     display: block;
     background-color: #fafafa;
     width: 100%;
@@ -181,7 +181,7 @@ button {
     transition: border-color .2s;
 }
 
-.label_register {
+.label-register {
     font-size: 11px;
     color: #666;
     text-transform: uppercase;
