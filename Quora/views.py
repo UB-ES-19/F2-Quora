@@ -114,6 +114,7 @@ def question(request, id):
 
 
 def profile(request, username):
+
     current_user = None
     for user in User.objects.all():
         if str(user.email) == str(username):
@@ -126,6 +127,14 @@ def profile(request, username):
     context = {'username': username,
                'posts': posts,
                'form': PersonalInfoForm(instance=current_user)}
+
+    if request.method == "POST":
+        post = PersonalInfoForm(request.POST, instance=current_user)
+        try:
+            post.save()
+        except:
+            print("Error updating user info")
+
     return render(request, 'profile.html', context)
 
 
