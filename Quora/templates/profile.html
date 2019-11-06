@@ -14,18 +14,20 @@
     <div class="column main">
         <div class="profile-info">
             <div class="edit-profile">
-                <a href="" class="active" data-toggle="modal" data-target="#openEditModal"><i class="fa fa-fw fa-edit"></i>Edit profile</a>
+                <a href="" class="active" data-toggle="modal" data-target="#openEditModal"><i
+                        class="fa fa-fw fa-edit"></i>Edit profile</a>
             </div>
             <div class="row row-no-gutters">
                 <div class="col-sm-4">
-                    <img class="profile-image" src="{% static "images/profile_default.png" %}" alt="Profile image" width="150" height="150">
+                    <img class="profile-image" src="{% static "images/profile_default.png" %}" alt="Profile image"
+                        width="150" height="150">
                 </div>
                 <div class="col-sm-8">
                     <br><br>
-                    <div class="profile-text" >
+                    <div class="profile-text">
                         <h2>{{user.first_name}} {{user.last_name}}</h2><br>
                         {% if user.description %}
-                        <p> user.description </p>
+                        <p> {{user.description}} </p>
                         {% else %}
                         <p>You haven't written your bio yet!</p>
                         {% endif %}
@@ -37,22 +39,23 @@
             <div class="row">
                 <div class="column aux">
                     <div class="vertical-menu-user">
-                      <a href="#" class="active">Questions</a>
-                      <a href="#">Answers</a>
-                      <a href="#">Following</a>
-                      <a href="#">Followers</a>
+                        <a href="#" class="active">Questions</a>
+                        <a href="#">Answers</a>
+                        <a href="#">Following</a>
+                        <a href="#">Followers</a>
                     </div>
                 </div>
                 <div class="column main">
                     <div class="Posts">
                         <h5>Your Posts</h5>
-                        {% if user.questions %}
-                        {% for post in user.questions %}
+                        {% if posts %}
+                        {% for post in posts %}
                         <a href="{% url 'question' id=post.id %}">
                             <div class="Post">
                                 <div class="PostMeta">
                                     <div class="PostDate">{{post.date}}</div>
-                                    <div class="PostUser"><b>{{post.user.first_name}} {{post.user.last_name}}</b> asks:</div>
+                                    <div class="PostUser"><b>{{post.user.first_name}} {{post.user.last_name}}</b> asks:
+                                    </div>
                                 </div>
                                 <div class="PostTitle">{{post.question}}?</div>
                             </div>
@@ -87,41 +90,49 @@
                 <form action="" method="POST">
                     {% csrf_token %}
                     {{ form.non_field_errors }}
-                    <input type="hidden" name="user" value="{{ user.id }}">
 
                     <div class="modal_content modal_content_tabs">
                         <div>
                             <label class="label-profile">Profile image</label>
                             <div class="row image-div">
-                                <img class="profile-image image-edit" id="profile-image" src="{% static "images/profile_default.png" %}" alt="Profile image" width="150" height="150">
+                                <img class="profile-image image-edit" id="profile-image"
+                                    src="{% static "images/profile_default.png" %}" alt="Profile image" width="150"
+                                    height="150">
                             </div>
                             <div class="row image-input">
-                                <input type='file' onchange="readURL(this);" />
+                                {{ form.photo.errors }}
+                                {{ form.photo }}
                             </div>
 
                             <hr>
 
                             <div class="row input-edit">
                                 {{ form.first_name.errors }}
-                                <label class="label-profile" for="{{ form.first_name.id_for_label }}">First name</label>
-                                <input type="text" value="{{user.first_name}}" placeholder="Your First Name">
+                                {{ form.first_name }}
                             </div>
 
                             <div class="row input-edit">
                                 {{ form.last_name.errors }}
-                                <label class="label-profile" for="{{ form.last_name.id_for_label }}">Last name</label>
-                                <input type="text" value="{{user.last_name}}" placeholder="Your Last Name">
+                                {{ form.last_name }}
                             </div>
 
                             <div class="row input-edit">
                                 <label class="label-profile">Bio</label>
+                                {{ form.description.errors }}
+                                {{ form.description }}
+                                <!--
                                 {% if user.description %}
-                                    <!-- <input type="text" value="{{user.description}}" placeholder="Write something about yourself"> -->
-                                    <textarea rows="4" cols="50" maxlength="350" id="bioTextarea" name="question" title="{{user.description}}" placeholder="Write something about yourself"></textarea>
+                                <input type="text" value="{{user.description}}" placeholder="Write something about yourself">
+                                <textarea rows="4" cols="50" maxlength="350" id="bioTextarea" name="question"
+                                    title="{{user.description}}"
+                                    placeholder="Write something about yourself"></textarea>
                                 {% else %}
-                                    <!-- <input type="text" value="You haven't written your bio yet!" placeholder="Write something about yourself"> -->
-                                    <textarea rows="4" cols="50" maxlength="350" id="bioTextarea" name="question" title="You haven't written your bio yet!" placeholder="Write something about yourself"></textarea>
+                                <input type="text" value="You haven't written your bio yet!" placeholder="Write something about yourself">
+                                <textarea rows="4" cols="50" maxlength="350" id="bioTextarea" name="question"
+                                    title="You haven't written your bio yet!"
+                                    placeholder="Write something about yourself"></textarea>
                                 {% endif %}
+                                -->
                             </div>
 
                         </div>
