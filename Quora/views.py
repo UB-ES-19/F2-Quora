@@ -126,7 +126,9 @@ def profile(request, username):
 
 
 def about(request):
-    return render(request, 'about.html')
+    context = {
+        'username': request.user.email if request.user.is_authenticated else 'anonymous'}
+    return render(request, 'about.html', context)
 
 
 def filtering(request, posts):
