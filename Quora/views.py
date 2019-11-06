@@ -126,11 +126,20 @@ def profile(request, username):
                'form': PersonalInfoForm(instance=current_user)}
 
     if request.method == "POST":
-        post = PersonalInfoForm(request.POST, instance=current_user)
-        try:
-            post.save()
-        except:
-            print("Error updating user info")
+        if request.POST.get("submit") == "editProfile":
+            post = PersonalInfoForm(request.POST, instance=current_user)
+            try:
+                post.save()
+            except:
+                print("Error updating user info")
+        elif request.POST.get("submit") == "addQuestion":
+            post = PostForm(request.POST)
+            try:
+                post.save()
+            except:
+                context['error'] = 'Please enter a question!'
+
+
 
     return render(request, 'profile.html', context)
 
@@ -138,6 +147,12 @@ def profile(request, username):
 def about(request):
     context = {
         'username': request.user.email if request.user.is_authenticated else 'anonymous'}
+    if request.POST.get("submit") == "addQuestion":
+        post = PostForm(request.POST)
+        try:
+            post.save()
+        except:
+            context['error'] = 'Please enter a question!'
     return render(request, 'about.html', context)
 
 
