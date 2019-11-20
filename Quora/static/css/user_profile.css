@@ -72,8 +72,12 @@ div {
 }
 
 .Posts {
-    margin: 2em auto;
+    margin: 0;
     margin-top: 0;
+}
+
+.Posts h5 {
+    margin: 0 1em;
 }
 
 .Post {
