@@ -34,6 +34,7 @@
     </div>
 
     {% endblock %}
+
     {% block header %}
     {% if user.is_authenticated %}
     <div class="header">
@@ -41,10 +42,6 @@
             <div class="logo">
                 Quokka
             </div>
-        </a>
-
-        <a class="item-header ghost" href="{% url 'about' %}">
-            About Quokka
         </a>
 
         <div class="user-overview">
@@ -186,13 +183,17 @@
         </div>
     </div>
 
-    {% block content %}{% endblock content %}
+    <div class="main-container">
 
-    <div class="base-footer">
-        <a class="item-footer ghost" href="{% url 'about' %}">
-            About Quokka
-        </a>
-    </div>
+        {% block content %}{% endblock content %}
+
+        <footer>
+            <a class="item-footer ghost" href="{% url 'about' %}">
+                About Quokka
+            </a>
+        </footer>
+
+    </div> <!-— /.main-container-->
 
     <script>
         setTimeout(function () {$('#notification').addClass('hidden')}, 1500);
