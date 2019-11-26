@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm, Post, PostForm, AnswerForm
+from .forms import RegistrationForm, Post, PostForm, AnswerForm, PersonalInfoForm
 from Quora.models import Answer, User, Follow
 
 
@@ -72,7 +72,7 @@ def logout_page(request):
 
 def landing(request):
     context = {'list': filtering(request, Post.objects.all().order_by(
-        '-id')), 'username': request.user.email}
+        '-id'))}
     if request.method == "POST":
         post = PostForm(request.POST)
         try:
@@ -92,43 +92,79 @@ def question(request, id):
     context = {
         'post': post,
         'answers': answers,
-        'answer_form': AnswerForm()
+        'answer_form': AnswerForm(),
+        'username': request.user.email
     }
 
     if request.method == 'POST':
-        answer = AnswerForm(request.POST)
-        try:
-            answer.save()
-        except:
-            context['error'] = 'Please enter an answer!'
+        if request.POST.get("submit") == "addAnswer":
+            answer = AnswerForm(request.POST)
+            try:
+                answer.save()
+            except:
+                context['error'] = 'Please enter an answer!'
+
+        elif request.POST.get("submit") == "addQuestion":
+            post = PostForm(request.POST)
+            try:
+                post.save()
+            except:
+                context['error'] = 'Please enter a question!'
+
     return render(request, 'view_question.html', context)
 
 
 def profile(request, username):
-    current_user = None
-    for user in User.objects.all():
-        if str(user.email) == str(username):
-            current_user = user
+
+    current_user = User.objects.get(email=username)
+    posts = Post.objects.filter(user=current_user)
 
     if current_user == None:
         return redirect('/')
-    context = {'username': username}
+    context = {'user': current_user,
+               'posts': posts,
+               'form': PersonalInfoForm(instance=current_user)}
+
+    if request.method == "POST":
+        if request.POST.get("submit") == "editProfile":
+            post = PersonalInfoForm(request.POST, instance=current_user)
+            try:
+                post.save()
+            except:
+                print("Error updating user info")
+        elif request.POST.get("submit") == "addQuestion":
+            post = PostForm(request.POST)
+            try:
+                post.save()
+            except:
+                context['error'] = 'Please enter a question!'
+
+
+
     return render(request, 'profile.html', context)
 
 
 def about(request):
-    return render(request, 'about.html')
+    context = {
+        'username': request.user.email if request.user.is_authenticated else 'anonymous'}
+    if request.POST.get("submit") == "addQuestion":
+        post = PostForm(request.POST)
+        try:
+            post.save()
+        except:
+            context['error'] = 'Please enter a question!'
+    return render(request, 'about.html', context)
 
 
 def filtering(request, posts):
-    lista_post = []
-    current_user = None
-    for follow in Follow.objects.all():
-        if str(follow.follower) == str(request.user.email):
-            current_user = follow
-    if current_user == None:
-        return []
-    for post in posts:
-        if str(post.user.email) in str(current_user.following.all()):
-            lista_post.append(post)
-    return lista_post
+    following = []
+
+    try:
+        follows = Follow.objects.get(follower=request.user)
+        following = [f.email for f in follows.following.all()]
+        posts = Post.objects.filter(user__email__in=following).order_by('-id')
+    except:
+        # User is following no one. Return empty list.
+        posts = []
+
+    return posts

@@ -1,11 +1,173 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-    <p1>{{ username }}</p1>
-</head>
-<body>
+{% extends "base.html" %}
+{% load filters %}
+{% load static %}
 
-</body>
-</html>
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Quokka - {{user.first_name}}'s Profile</title>
+{% endblock extrahead %}
+
+
+{% block content %}
+<div class="container">
+    <div class="column main">
+        <div class="profile-info">
+            <div class="edit-profile">
+                <a href="" class="active" data-toggle="modal" data-target="#openEditModal"><i
+                        class="fa fa-fw fa-edit"></i>Edit profile</a>
+            </div>
+            <div class="row row-no-gutters">
+                <div class="col-sm-4">
+                    <img class="profile-image" src="{% static "images/profile_default.png" %}" alt="Profile image"
+                        width="150" height="150">
+                </div>
+                <div class="col-sm-8">
+                    <br><br>
+                    <div class="profile-text">
+                        <h2>{{user.first_name}} {{user.last_name}}</h2><br>
+                        {% if user.description %}
+                        <p> {{user.description}} </p>
+                        {% else %}
+                        <p>You haven't written your bio yet!</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Content">
+            <div class="row">
+                <div class="column aux">
+                    <div class="vertical-menu-user">
+                        <a href="#" class="active">Questions</a>
+                        <a href="#">Answers</a>
+                        <a href="#">Following</a>
+                        <a href="#">Followers</a>
+                    </div>
+                </div>
+                <div class="column main">
+                    <div class="Posts">
+                        <h5>Your Posts</h5>
+                        {% if posts %}
+                        {% for post in posts %}
+                        <a href="{% url 'question' id=post.id %}">
+                            <div class="Post">
+                                <div class="PostMeta">
+                                    <div class="PostDate">{{post.date}}</div>
+                                    <div class="PostUser"><b>{{post.user.first_name}} {{post.user.last_name}}</b> asks:
+                                    </div>
+                                </div>
+                                <div class="PostTitle">{{post.question}}?</div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                        {% else %}
+                        <div class="line main"></div><br>
+                        <p>You haven't posted anything yet!</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="openEditModal">
+    <div class="modal_overlay">
+        <div class="modal_wrapper normal">
+            <div class="Step AskQuestionStep Modal">
+                <div class="modal_header only_close_button">
+                    <div class="modal_close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="tabs_header u-flex-inline u-flex-row">
+                        <div class="tab selected">Edit your profile</div>
+                    </div>
+                </div>
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+
+                    <div class="modal_content modal_content_tabs">
+                        <div>
+                            <label class="label-profile">Profile image</label>
+                            <div class="row image-div">
+                                <img class="profile-image image-edit" id="profile-image"
+                                    src="{% static "images/profile_default.png" %}" alt="Profile image" width="150"
+                                    height="150">
+                            </div>
+                            <div class="row image-input">
+                                {{ form.photo.errors }}
+                                {{ form.photo }}
+                            </div>
+
+                            <hr>
+
+                            <div class="row input-edit">
+                                {{ form.first_name.errors }}
+                                {{ form.first_name }}
+                            </div>
+
+                            <div class="row input-edit">
+                                {{ form.last_name.errors }}
+                                {{ form.last_name }}
+                            </div>
+
+                            <div class="row input-edit">
+                                <label class="label-profile">Bio</label>
+                                {{ form.description.errors }}
+                                {{ form.description }}
+                                <!--
+                                {% if user.description %}
+                                <input type="text" value="{{user.description}}" placeholder="Write something about yourself">
+                                <textarea rows="4" cols="50" maxlength="350" id="bioTextarea" name="question"
+                                    title="{{user.description}}"
+                                    placeholder="Write something about yourself"></textarea>
+                                {% else %}
+                                <input type="text" value="You haven't written your bio yet!" placeholder="Write something about yourself">
+                                <textarea rows="4" cols="50" maxlength="350" id="bioTextarea" name="question"
+                                    title="You haven't written your bio yet!"
+                                    placeholder="Write something about yourself"></textarea>
+                                {% endif %}
+                                -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal_footer">
+                        <div class="modal_actions">
+                            <span>
+                                <a class="button ghost" data-dismiss="modal" aria-label="Close" href="">Cancel</a>
+                            </span>
+                            <span>
+                                <button class="button" name="submit" value="editProfile">Apply changes</button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profile-image')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(150);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+{% endblock content %}
