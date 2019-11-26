@@ -142,12 +142,12 @@ textarea {
     color: #444 !important;
 }
 
-.base-footer::before {
+footer::before {
     display: table;
     content: "";
 }
 
-.base-footer {
+footer {
     width: 75%;
     margin-left: auto;
     margin-right: auto;
@@ -160,4 +160,12 @@ textarea {
     right: 0;
     bottom: 0;
     left: 0;
+}
+
+.main-container {
+    min-height: 100vh; /* will cover the 100% of viewport */
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 100px; /* height of your footer */
 }
