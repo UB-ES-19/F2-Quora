@@ -139,7 +139,6 @@ def profile(request, username):
             except:
                 context['error'] = 'Please enter a question!'
 
-
     return render(request, 'profile.html', context)
 
 
@@ -173,3 +172,10 @@ def follow(request,userToFollow):
         followed = User.objects.get(email=userToFollow)
         object.following.add(followed.id)
         object.save()
+
+def search(word):
+    user_list=[]
+    for userObject in User.objects.all():
+        if word == userObject.email or word in userObject.first_name or word in userObject.last_name:
+            user_list.append(userObject)
+    return user_list
