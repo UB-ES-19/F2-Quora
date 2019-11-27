@@ -174,6 +174,7 @@ def follow(request,userToFollow):
         object.save()
 
 def search(word):
+
     user_list=[]
     for userObject in User.objects.all():
         if word == userObject.email or word in userObject.first_name or word in userObject.last_name:
