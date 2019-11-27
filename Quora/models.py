@@ -69,7 +69,7 @@ class Post(models.Model):
     date = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     question = models.TextField()
-
+    topic = models.TextField(default=None)
 
 class Answer(models.Model):
     """Answer model"""
