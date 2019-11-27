@@ -31,6 +31,7 @@ def index(request, *args, **kwards):
                 followDB = Follow.objects.create()
                 followDB.follower = user
                 followDB.save()
+                follow(request,username)
                 return redirect('/homepage/')
 
         elif request.POST.get("submit") == "login":
