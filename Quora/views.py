@@ -140,7 +140,6 @@ def profile(request, username):
                 context['error'] = 'Please enter a question!'
 
 
-
     return render(request, 'profile.html', context)
 
 
@@ -168,3 +167,9 @@ def filtering(request, posts):
         posts = []
 
     return posts
+
+def follow(request,userToFollow):
+        object = Follow.objects.get(follower=request.user)
+        followed = User.objects.get(email=userToFollow)
+        object.following.add(followed.id)
+        object.save()
