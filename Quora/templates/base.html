@@ -19,6 +19,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     {% block extrahead %}{% endblock extrahead %}
 </head>
 
@@ -86,7 +87,7 @@
                         <div class="modal_content modal_content_tabs">
                             <div>
                                 <div class="u-border-bottom u-margin-bottom--md u-padding-bottom--sm">
-                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--xs">
+                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--sm">
                                         Tips on
                                         getting good answers quickly</p>
                                     <ul class="tip_list">
@@ -146,23 +147,153 @@
                                         </div>
                                     </ul>
                                 </div>
-
-                                <div class="ask_modal_header u-flex">
-                                    <div class="user_asks_header">
-                                        {% if user.first_name != '' %}
-                                        <span class="user"> {{user.first_name}} {{user.last_name}} asked </span>
-                                        {% else %}
-                                        <span class="user"> {{user.email}} asked </span>
-                                        {% endif %}
+                                <div class="u-border-bottom u-margin-bottom--md u-padding-bottom--sm">
+                                    <div class="ask_modal_header u-flex">
+                                        <div class="user_asks_header">
+                                            {% if user.first_name != '' %}
+                                            <span class="user"> {{user.first_name}} {{user.last_name}} asked </span>
+                                            {% else %}
+                                            <span class="user"> {{user.email}} asked </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="AskQuestionSelector Selector" tabindex="-1">
+                                        <div class="selector_input_interaction">
+                                            <textarea class="selector_input" id="questionTextarea" name="question" rows="1"
+                                                onkeyup="textAreaAdjust(this)"
+                                                title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."
+                                                data-group="js-editable"
+                                                placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="AskQuestionSelector Selector" tabindex="-1">
-                                    <div class="selector_input_interaction">
-                                        <textarea class="selector_input" id="questionTextarea" name="question" rows="1"
-                                            onkeyup="textAreaAdjust(this)"
-                                            title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."
-                                            data-group="js-editable"
-                                            placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
+
+                                <div>
+                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--sm">Select one to three topics to categorise your post</p>
+                                     <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                 <input class="topic" type="checkbox"> Technology
+                                                 <span class="fa fa-check"></span>
+                                             </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Mathematics
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Entertainment
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Business
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Humanities
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Literature
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Politics
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Healthcare
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Education
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Sports
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Cooking
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Science
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Nature
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Life
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Travel
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> News
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Art
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn">
+                                                <input type="checkbox"> Other
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                         </div>
                                     </div>
                                 </div>
                             </div>

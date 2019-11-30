@@ -169,3 +169,25 @@ footer {
     position: relative;
     padding-bottom: 100px; /* height of your footer */
 }
+
+.btn span.fa-check {
+	opacity: 0;
+}
+
+.btn.active span.fa-check {
+	opacity: 2;
+}
+
+.topic-btn {
+    background-color: rgba(68, 68, 68, 0.20);
+    border-radius: 10px;
+    border: none;
+    color: black;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 150px;
+}
