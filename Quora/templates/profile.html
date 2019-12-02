@@ -37,7 +37,9 @@
 
             </div>
             <div class="btn-container">
-                <button class="btn followButton" rel="6">Follow</button>
+                <form>
+                    <button name="submit" value="Follow" class="btn followButton" rel="6">Follow</input>
+                </form>
             </div>
         </div>
         <div class="Content">
@@ -174,10 +176,10 @@
         }
     }
 
-    $('div.btn-container').on('click', 'button.followButton', function(e){
+    $('div.btn-container').on('click', 'button.followButton', function (e) {
         e.preventDefault();
         $button = $(this);
-        if($button.hasClass('following')){
+        if ($button.hasClass('following')) {
 
             //$.ajax(); Do Unfollow
 
@@ -193,16 +195,16 @@
         }
     });
 
-    $('div.btn-container').on('mouseover', 'button.followButton', function(){
+    $('div.btn-container').on('mouseover', 'button.followButton', function () {
         $button = $(this);
-        if($button.hasClass('following')){
+        if ($button.hasClass('following')) {
             $button.addClass('unfollow');
             $button.text('Unfollow');
         }
     });
-    $('div.btn-container').on('mouseout', 'button.followButton', function(){
+    $('div.btn-container').on('mouseout', 'button.followButton', function () {
         $button = $(this);
-        if($button.hasClass('following')){
+        if ($button.hasClass('following')) {
             $button.removeClass('unfollow');
             $button.text('Following');
         }
