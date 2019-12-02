@@ -174,6 +174,14 @@ def follow(request,userToFollow):
         object.following.add(followed.id)
         object.save()
 
+
+def unfollow(request, userToUnfollow):
+    object = Follow.objects.get(follower=request.user)
+    followed = User.objects.get(email=userToUnfollow)
+    if userToUnfollow != request.user.email:
+        object.following.remove(followed.id)
+        object.save()
+
 def search(word):
 
     user_list=[]
@@ -181,3 +189,7 @@ def search(word):
         if word == userObject.email or word in userObject.first_name or word in userObject.last_name:
             user_list.append(userObject)
     return user_list
+
+def saveImageDB(request,url):
+    request.user.photo = url
+    request.user.save()
