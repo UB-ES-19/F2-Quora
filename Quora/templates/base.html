@@ -80,7 +80,7 @@
                             <div class="tab selected">Add Question</div>
                         </div>
                     </div>
-                    <form action="" method="POST">
+                    <form id="postForm" action="" method="POST">
                         {% csrf_token %}
                         {{ form.non_field_errors }}
                         <input type="hidden" name="user" value="{{ user.id }}">
@@ -172,19 +172,19 @@
                                     <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--sm">Select one to three topics to categorise your post</p>
                                      <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
-                                                 <input class="topic" type="checkbox"> Technology
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                 <input type="checkbox"> Technology
                                                  <span class="fa fa-check"></span>
                                              </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Mathematics
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Entertainment
                                                 <span class="fa fa-check"></span>
                                             </label>
@@ -193,19 +193,19 @@
 
                                     <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Business
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Humanities
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Literature
                                                 <span class="fa fa-check"></span>
                                             </label>
@@ -214,19 +214,19 @@
 
                                     <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Politics
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Healthcare
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Education
                                                 <span class="fa fa-check"></span>
                                             </label>
@@ -235,19 +235,19 @@
 
                                     <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Sports
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Cooking
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Science
                                                 <span class="fa fa-check"></span>
                                             </label>
@@ -256,19 +256,19 @@
 
                                     <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Nature
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Life
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Travel
                                                 <span class="fa fa-check"></span>
                                             </label>
@@ -277,19 +277,19 @@
 
                                     <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> News
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Art
                                                 <span class="fa fa-check"></span>
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
-                                             <label class="topic-btn">
+                                             <label class="topic-btn" onclick="setColor(event)";>
                                                 <input type="checkbox"> Other
                                                 <span class="fa fa-check"></span>
                                             </label>
@@ -299,12 +299,13 @@
                             </div>
                         </div>
                         <div class="modal_footer">
+
                             <div class="modal_actions">
                                 <span>
                                     <a class="button ghost" data-dismiss="modal" aria-label="Close" href="">Cancel</a>
                                 </span>
                                 <span>
-                                    <button class="button" name="submit" value="addQuestion">Add Question</button>
+                                    <button id="postQuestionButton" class="button" name="submit" value="addQuestion">Add Question</button>
                                 </span>
                             </div>
                         </div>
@@ -333,6 +334,25 @@
             o.style.height = "1px";
             o.style.height = (25 + o.scrollHeight) + "px";
         }
+
+        function setColor(e) {
+            var status = e.target.classList.contains('active');
+
+            e.target.classList.add(status ? 'inactive' : 'active');
+            e.target.classList.remove(status ? 'active' : 'inactive');
+        }
+
+        $('#postForm').submit(function() {
+            var num_active_topics = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            if (num_active_topics === 0) {
+                alert("Select at least one topic for your question.");
+                return false;
+            } else if (num_active_topics > 3) {
+                alert("Select at most three topics for your question.")
+                return false;
+            }
+            return true; // return false to cancel form action
+        });
     </script>
 
 </body>

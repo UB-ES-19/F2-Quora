@@ -191,3 +191,13 @@ footer {
     cursor: pointer;
     width: 150px;
 }
+
+.active {
+    background-color: #468e9d;
+    color: white;
+}
+
+.inactive {
+    background-color: rgba(68, 68, 68, 0.20);
+    color: black;
+}
