@@ -2,9 +2,19 @@ div {
     display: block;
 }
 
-.title {
+h5 {
+    margin-top: 8px;
     margin-bottom: 8px;
+    font-size: 20px;
     font-weight: bold;
+}
+
+.PostTitle {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
 }
 
 .vertical-menu-user {
@@ -73,7 +83,6 @@ div {
 
 .Posts {
     margin: 0;
-    margin-top: 0;
 }
 
 .Posts h5 {
@@ -156,6 +165,11 @@ div {
     overflow: hidden;
     overflow-wrap: break-word;
 }
+
+.margin-left-custom {
+    margin-left: 1px;
+}
+
 .btn-container{
 
     margin-right: 5px;
