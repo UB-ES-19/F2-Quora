@@ -2,9 +2,19 @@ div {
     display: block;
 }
 
-.title {
+h5 {
+    margin-top: 8px;
     margin-bottom: 8px;
+    font-size: 20px;
     font-weight: bold;
+}
+
+.PostTitle {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
 }
 
 .vertical-menu-user {
@@ -73,7 +83,6 @@ div {
 
 .Posts {
     margin: 0;
-    margin-top: 0;
 }
 
 .Posts h5 {
@@ -155,4 +164,17 @@ div {
     padding-bottom: 8px;
     overflow: hidden;
     overflow-wrap: break-word;
+}
+
+.topic-label {
+    background-color: #c1dbde;
+    border-radius: 10px;
+    border: none;
+    color: black;
+    padding: 4px;
+    text-align: center;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 8px;
+    width: 100px;
 }
