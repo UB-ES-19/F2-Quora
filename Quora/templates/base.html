@@ -36,7 +36,6 @@
     <div class="notification">
 
     </div>
-
     {% endblock %}
 
     {% block header %}
@@ -47,8 +46,6 @@
                 Quokka
             </div>
         </a>
-
-
         <div class="user-overview">
 
             <div class="welcome">
@@ -66,8 +63,8 @@
             <a href="{% url 'logout' %}" class="button ghost">Log out</a>
         </div>
         <form class="example" action="#" style="margin:auto;width:200px">
-                    <input type="text" placeholder="Find Users" name="search">
-                    <button type="submit"><i class="fa fa-search"></i></button>
+            <input type="text" placeholder="Find Users" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
     {% else %}
