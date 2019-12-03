@@ -37,8 +37,9 @@
 
             </div>
             <div class="btn-container">
-                <form>
-                    <button name="submit" value="Follow" class="btn followButton" rel="6">Follow</input>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <button name="submit" value="follow" class="btn followButton" rel="6">Follow</input>
                 </form>
             </div>
         </div>

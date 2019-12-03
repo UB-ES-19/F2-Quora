@@ -138,7 +138,7 @@ def profile(request, username):
                 post.save()
             except:
                 context['error'] = 'Please enter a question!'
-        elif request.POST.get("submit") == "Follow":
+        elif request.POST.get("submit") == "follow":
             print("Clicked on follow")
             follows = Follow.objects.get(follower=request.user)
             follows.following.add(current_user)
