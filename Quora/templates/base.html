@@ -175,41 +175,17 @@
                                      <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                 <input type="checkbox"> Technology
-                                                 <span class="fa fa-check"></span>
+                                                 Technology
                                              </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Mathematics
-                                                <span class="fa fa-check"></span>
+                                                Mathematics
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Entertainment
-                                                <span class="fa fa-check"></span>
-                                            </label>
-                                         </div>
-                                    </div>
-
-                                    <div class="row u-margin-bottom--sm">
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Business
-                                                <span class="fa fa-check"></span>
-                                            </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Humanities
-                                                <span class="fa fa-check"></span>
-                                            </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Literature
-                                                <span class="fa fa-check"></span>
+                                                Entertainment
                                             </label>
                                          </div>
                                     </div>
@@ -217,20 +193,17 @@
                                     <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Politics
-                                                <span class="fa fa-check"></span>
+                                                Business
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Healthcare
-                                                <span class="fa fa-check"></span>
+                                                Humanities
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Education
-                                                <span class="fa fa-check"></span>
+                                                 Literature
                                             </label>
                                          </div>
                                     </div>
@@ -238,20 +211,17 @@
                                     <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Sports
-                                                <span class="fa fa-check"></span>
+                                                Politics
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Cooking
-                                                <span class="fa fa-check"></span>
+                                                Healthcare
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Science
-                                                <span class="fa fa-check"></span>
+                                                Education
                                             </label>
                                          </div>
                                     </div>
@@ -259,20 +229,17 @@
                                     <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Nature
-                                                <span class="fa fa-check"></span>
+                                                Sports
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Life
-                                                <span class="fa fa-check"></span>
+                                                Cooking
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Travel
-                                                <span class="fa fa-check"></span>
+                                                Science
                                             </label>
                                          </div>
                                     </div>
@@ -280,20 +247,35 @@
                                     <div class="row u-margin-bottom--sm">
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> News
-                                                <span class="fa fa-check"></span>
+                                                Nature
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Art
-                                                <span class="fa fa-check"></span>
+                                                Life
                                             </label>
                                          </div>
                                          <div class="col-sm-4">
                                              <label class="topic-btn" onclick="setColor(event)";>
-                                                <input type="checkbox"> Other
-                                                <span class="fa fa-check"></span>
+                                                Travel
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                News
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Art
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Other
                                             </label>
                                          </div>
                                     </div>
@@ -345,7 +327,7 @@
         }
 
         $('#postForm').submit(function() {
-            var num_active_topics = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            var num_active_topics = document.querySelectorAll('label.active-label').length;
             if (num_active_topics === 0) {
                 alert("Select at least one topic for your question.");
                 return false;
