@@ -186,3 +186,41 @@ footer {
     margin-right: 18px;
     width: 100px;
 }
+
+form.example input[type=text] {
+  padding: 8px;
+  font-size: 15px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+
+}
+form.example input[type=text]:focus{
+    border-width: 1px;
+    border-color: #468e9d
+
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 8px;
+  background: #468e9d;
+  color: white;
+  font-size: 15px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+
+}
+
+form.example button:hover {
+  background: #65b2c2;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/modal_question.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="icon" href="https://qsf.fs.quoracdn.net/-3-images.favicon.ico-26-ae77b637b1e7ed2c.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -35,7 +36,6 @@
     <div class="notification">
 
     </div>
-
     {% endblock %}
 
     {% block header %}
@@ -46,8 +46,8 @@
                 Quokka
             </div>
         </a>
-
         <div class="user-overview">
+
             <div class="welcome">
                 <a class="text-link ghost" href="{% url 'profile' username=user.email %}">
                     {% if user.first_name != '' %}
@@ -62,6 +62,10 @@
             </button>
             <a href="{% url 'logout' %}" class="button ghost">Log out</a>
         </div>
+        <form class="example" action="#" style="margin:auto;width:200px">
+            <input type="text" placeholder="Find Users" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
     </div>
     {% else %}
     <div style="height: 5em"></div>
