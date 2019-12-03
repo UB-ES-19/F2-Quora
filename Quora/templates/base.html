@@ -336,10 +336,10 @@
         }
 
         function setColor(e) {
-            var status = e.target.classList.contains('active');
+            var status = e.target.classList.contains('active-label');
 
-            e.target.classList.add(status ? 'inactive' : 'active');
-            e.target.classList.remove(status ? 'active' : 'inactive');
+            e.target.classList.add(status ? 'inactive-label' : 'active-label');
+            e.target.classList.remove(status ? 'active-label' : 'inactive-label');
         }
 
         $('#postForm').submit(function() {

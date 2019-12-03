@@ -166,15 +166,6 @@ h5 {
     overflow-wrap: break-word;
 }
 
-.topic-label {
-    background-color: #c1dbde;
-    border-radius: 10px;
-    border: none;
-    color: black;
-    padding: 4px;
-    text-align: center;
-    display: inline-block;
-    margin-left: 10px;
-    margin-right: 8px;
-    width: 100px;
+.margin-left-custom {
+    margin-left: 1px;
 }

@@ -29,16 +29,3 @@
     font-weight: bold;
     margin-top: .5em;
 }
-
-.topic-label {
-    background-color: #c1dbde;
-    border-radius: 10px;
-    border: none;
-    color: black;
-    padding: 4px;
-    text-align: center;
-    display: inline-block;
-    margin-left: 10px;
-    margin-right: 8px;
-    width: 100px;
-}

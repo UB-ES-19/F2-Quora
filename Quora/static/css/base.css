@@ -165,12 +165,24 @@ footer {
     width: 150px;
 }
 
-.active {
+.active-label {
     background-color: #468e9d;
     color: white;
 }
 
-.inactive {
+.inactive-label {
     background-color: rgba(68, 68, 68, 0.20);
     color: black;
+}
+
+.topic-label {
+    background-color: #c1dbde;
+    border-radius: 10px;
+    border: none;
+    color: black;
+    padding: 4px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 18px;
+    width: 100px;
 }
