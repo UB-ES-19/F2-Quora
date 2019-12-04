@@ -80,8 +80,6 @@ def landing(request):
     for p in post_list:
         posts.append([p, p.topic.split(',')])
 
-    print(posts)
-
     context = {'list': posts}
     if request.method == "POST":
         post = PostForm(request.POST)
@@ -99,9 +97,11 @@ def landing(request):
 def question(request, id):
     post = Post.objects.get(id=id)
     answers = Answer.objects.filter(original_post=id)
+    topics = post.topic.split(',')
 
     context = {
         'post': post,
+        'topics': topics,
         'answers': answers,
         'answer_form': AnswerForm(),
         'username': request.user.email
@@ -128,8 +128,13 @@ def question(request, id):
 def profile(request, username):
 
     current_user = User.objects.get(email=username)
-    posts = Post.objects.filter(user=current_user)
+    post_list = Post.objects.filter(user=current_user)
     is_following = False
+
+    posts = []
+
+    for p in post_list:
+        posts.append([p, p.topic.split(',')])
 
     try:
         follows = Follow.objects.get(follower=request.user)
