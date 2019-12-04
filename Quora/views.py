@@ -129,10 +129,6 @@ def profile(request, username):
 
     if current_user == None:
         return redirect('/')
-    context = {'user': current_user,
-               'posts': posts,
-               'form': PersonalInfoForm(instance=current_user),
-               'is_following': is_following}
 
     if request.method == "POST":
         if request.POST.get("submit") == "editProfile":
@@ -155,11 +151,16 @@ def profile(request, username):
                 follows.save()
             follows = follows.first()
             if not is_following:
-                follows.following.add(current_user)
+                follow(request, current_user)
                 is_following = True
             else:
-                follows.following.remove(current_user)
+                unfollow(request, current_user)
                 is_following = False
+
+    context = {'user': current_user,
+               'posts': posts,
+               'form': PersonalInfoForm(instance=current_user),
+               'is_following': is_following}
 
     return render(request, 'profile.html', context)
 
@@ -191,18 +192,18 @@ def filtering(request, posts):
 
 
 def follow(request, userToFollow):
-    object = Follow.objects.get(follower=request.user)
+    obj = Follow.objects.get(follower=request.user)
     followed = User.objects.get(email=userToFollow)
-    object.following.add(followed.id)
-    object.save()
+    obj.following.add(followed.id)
+    obj.save()
 
 
 def unfollow(request, userToUnfollow):
-    object = Follow.objects.get(follower=request.user)
+    obj = Follow.objects.get(follower=request.user)
     followed = User.objects.get(email=userToUnfollow)
     if userToUnfollow != request.user.email:
-        object.following.remove(followed.id)
-        object.save()
+        obj.following.remove(followed.id)
+        obj.save()
 
 
 def search(word):
