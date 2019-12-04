@@ -39,7 +39,13 @@
             <div class="btn-container">
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <button name="submit" value="follow" class="btn followButton" rel="6">Follow</input>
+                    <button name="submit" value="follow" class="btn followButton {% if is_following %} following {% endif %}" rel="6">
+                        {% if is_following %}
+                        Following
+                        {% else %}
+                        Follow
+                        {% endif %}
+                    </input>
                 </form>
             </div>
         </div>
@@ -178,7 +184,7 @@
     }
 
     $('div.btn-container').on('click', 'button.followButton', function (e) {
-        e.preventDefault();
+        
         $button = $(this);
         if ($button.hasClass('following')) {
 

@@ -118,12 +118,20 @@ def profile(request, username):
 
     current_user = User.objects.get(email=username)
     posts = Post.objects.filter(user=current_user)
+    is_following = False
+
+    try:
+        follows = Follow.objects.get(follower=request.user)
+        is_following = current_user in follows.following.all()
+    except:
+        pass
 
     if current_user == None:
         return redirect('/')
     context = {'user': current_user,
                'posts': posts,
-               'form': PersonalInfoForm(instance=current_user)}
+               'form': PersonalInfoForm(instance=current_user),
+               'is_following': is_following}
 
     if request.method == "POST":
         if request.POST.get("submit") == "editProfile":
@@ -139,10 +147,18 @@ def profile(request, username):
             except:
                 context['error'] = 'Please enter a question!'
         elif request.POST.get("submit") == "follow":
-            print("Clicked on follow")
-            follows = Follow.objects.get(follower=request.user)
-            follows.following.add(current_user)
-            print(follows)
+            follows = Follow.objects.filter(follower=request.user)
+            if not follows.exists():
+                print("Follows doesn't exist, creating")
+                follows = Follow(follower=request.user)
+                follows.save()
+            follows = follows.first()
+            if not is_following:
+                follows.following.add(current_user)
+                is_following = True
+            else:
+                follows.following.remove(current_user)
+                is_following = False
 
     return render(request, 'profile.html', context)
 
