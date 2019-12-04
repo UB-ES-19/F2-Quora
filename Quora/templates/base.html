@@ -8,15 +8,13 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="icon" href="https://qsf.fs.quoracdn.net/-3-images.favicon.ico-26-ae77b637b1e7ed2c.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,600&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
@@ -63,9 +61,12 @@
             <a href="{% url 'logout' %}" class="button ghost">Log out</a>
         </div>
         <form class="example" action="#" style="margin:auto;width:200px">
-            <input type="text" placeholder="Find Users" name="search">
+            <input type="text" placeholder="Find Users" name="search" id="userSearchInput"
+                onkeyup="retrieveUsersByName()">
             <button type="submit"><i class="fa fa-search"></i></button>
+            <div id="searchResults"></div>
         </form>
+
     </div>
     {% else %}
     <div style="height: 5em"></div>
@@ -321,6 +322,14 @@
     <!-— /.main-container--> <script>
         var selectedTopics = [];
         setTimeout(function () {$('#notification').addClass('hidden')}, 1500);
+
+        function retrieveUsersByName() {
+            const name = $("#userSearchInput").val();
+            $.get("/ajax_search/" + name, function (data) {
+                $("#searchResults").html(data);
+            });
+
+        }
 
         function textAreaAdjust(o) {
             o.style.height = "1px";

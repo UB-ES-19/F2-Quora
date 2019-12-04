@@ -26,5 +26,6 @@ urlpatterns = [
     path('logout', views.logout_page, name="logout"),
     path('question/<int:id>/', views.question, name='question'),
     path('about/', views.about, name="about"),
-    path('profile/<username>/', views.profile, name="profile")
+    path('profile/<username>/', views.profile, name="profile"),
+    path('ajax_search/<str>/', views.ajaxSearch, name="ajaxSearch")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

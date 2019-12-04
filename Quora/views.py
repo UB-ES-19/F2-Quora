@@ -194,6 +194,14 @@ def about(request):
     return render(request, 'about.html', context)
 
 
+def ajaxSearch(request, str):
+    result = ""
+    for user in search(str):
+        result += '<a href="/profile/' + user.email + '"><div class="userResult"><b>' + user.first_name + ' ' + \
+            user.last_name + '</b><br>' + user.email + '</div></a>'
+    return HttpResponse(result)
+
+
 def filtering(request, posts):
     following = []
 
