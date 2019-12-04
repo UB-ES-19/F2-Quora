@@ -325,6 +325,7 @@
 
         function retrieveUsersByName() {
             const name = $("#userSearchInput").val();
+            if (name == "") $("#searchResults").html("");
             $.get("/ajax_search/" + name, function (data) {
                 $("#searchResults").html(data);
             });
