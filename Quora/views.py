@@ -72,10 +72,20 @@ def logout_page(request):
 
 
 def landing(request):
-    context = {'list': filtering(request, Post.objects.all().order_by(
-        '-id'))}
+    post_list = filtering(request, Post.objects.all().order_by(
+        '-id'))
+
+    posts = []
+
+    for p in post_list:
+        posts.append([p, p.topic.split(',')])
+
+    print(posts)
+
+    context = {'list': posts}
     if request.method == "POST":
         post = PostForm(request.POST)
+
         try:
             post.save()
         except:
