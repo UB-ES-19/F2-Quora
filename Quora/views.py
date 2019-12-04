@@ -78,7 +78,8 @@ def landing(request):
     posts = []
 
     for p in post_list:
-        posts.append([p, p.topic.split(',')])
+        num_answers = Answer.objects.filter(original_post=p.id).count()
+        posts.append([p, p.topic.split(','), num_answers])
 
     context = {'list': posts}
     if request.method == "POST":
@@ -128,13 +129,14 @@ def question(request, id):
 def profile(request, username):
 
     current_user = User.objects.get(email=username)
-    post_list = Post.objects.filter(user=current_user)
+    post_list = Post.objects.filter(user=current_user).order_by('-id')
     is_following = False
 
     posts = []
 
     for p in post_list:
-        posts.append([p, p.topic.split(',')])
+        num_answers = Answer.objects.filter(original_post=p.id).count()
+        posts.append([p, p.topic.split(','), num_answers])
 
     try:
         follows = Follow.objects.get(follower=request.user)
