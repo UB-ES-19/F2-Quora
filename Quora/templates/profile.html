@@ -12,10 +12,12 @@
 <div class="container">
     <div class="column main">
         <div class="profile-info">
+            {% if request.user == user %}
             <div class="edit-profile">
                 <a href="" class="active" data-toggle="modal" data-target="#openEditModal"><i
                         class="fa fa-fw fa-edit"></i>Edit profile</a>
             </div>
+            {% endif %}
             <div class="row row-no-gutters">
                 <div class="col-sm-4">
                     <img class="profile-image" src="{% static "images/profile_default.png" %}" alt="Profile image"
@@ -36,6 +38,7 @@
 
             </div>
             <div class="btn-container">
+                {% if request.user != user %}
                 <form action="" method="POST">
                     {% csrf_token %}
                     <button name="submit" value="follow"
@@ -47,6 +50,7 @@
                         {% endif %}
                         </input>
                 </form>
+                {% endif %}
             </div>
         </div>
         <div class="Content">

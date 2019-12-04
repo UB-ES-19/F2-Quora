@@ -47,11 +47,11 @@
         <div class="user-overview">
 
             <div class="welcome">
-                <a class="text-link ghost" href="{% url 'profile' username=user.email %}">
+                <a class="text-link ghost" href="{% url 'profile' username=request.user.email %}">
                     {% if user.first_name != '' %}
-                    Welcome, <b>{{user.first_name}} {{user.last_name}}</b>!
+                    Welcome, <b>{{request.user.first_name}} {{request.user.last_name}}</b>!
                     {% else %}
-                    Welcome, <b>{{user.email}}</b>!
+                    Welcome, <b>{{request.user.email}}</b>!
                     {% endif %}
                 </a>
             </div>
@@ -62,7 +62,7 @@
         </div>
         <form class="example" action="#" style="margin:auto;width:200px">
             <input type="text" placeholder="Find Users" name="search" id="userSearchInput"
-                onkeyup="retrieveUsersByName()">
+                onkeyup="retrieveUsersByName()" autocomplete="off">
             <button type="submit"><i class="fa fa-search"></i></button>
             <div id="searchResults"></div>
         </form>
@@ -320,7 +320,7 @@
 
     </div>
     <!-— /.main-container--> <script>
-        var selectedTopics = [];
+        window.selectedTopics = [];
         setTimeout(function () {$('#notification').addClass('hidden')}, 1500);
 
         function retrieveUsersByName() {
@@ -346,7 +346,16 @@
 
         function selectTopic(e, topic) {
             setColor(e);
-            selectedTopics.push(topic);
+            console.log(topic);
+            if (window.selectedTopics.includes(topic)) {
+
+                window.selectedTopics = window.selectedTopics.filter((i) => {
+                    return (i !== topic);
+                }
+                );
+            }
+            else window.selectedTopics.push(topic);
+            console.log(window.selectedTopics);
         }
 
         $('#postForm').submit(function () {
@@ -358,9 +367,10 @@
                 alert("Select at most three topics for your question.")
                 return false;
             }
-            $('#topicInput').val(selectedTopics.join());
+            $('#topicInput').val(window.selectedTopics.join());
             return true; // return false to cancel form action
         });
+
     </script>
 
 </body>

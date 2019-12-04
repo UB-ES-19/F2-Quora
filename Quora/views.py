@@ -105,7 +105,7 @@ def question(request, id):
         'topics': topics,
         'answers': answers,
         'answer_form': AnswerForm(),
-        'username': request.user.email
+        'username': post.user
     }
 
     if request.method == 'POST':
