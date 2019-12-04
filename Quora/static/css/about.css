@@ -8,12 +8,12 @@ html {
 
 body {
     font-size: 18px;
-    font-family: 'Overpass';
+    font-family: 'Overpass', sans-serif;
 }
 
 p {
-margin-bottom: 5px;
-font-size: 15px;
+    margin-bottom: 5px;
+    font-size: 15px;
 }
 
 .highlight{
@@ -27,7 +27,7 @@ font-size: 15px;
 
 /* Create columns */
 .column {
-    float: left;
+    margin: auto;
     padding: 10px;
 }
 
@@ -46,9 +46,14 @@ font-size: 15px;
     text-align: justify;
     text-justify: inter-word;
 }
+
 .about-image{
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 70%;
+}
+
+.container {
+    overflow: auto;
 }

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load filters %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Quokka - Home</title>
+{% endblock extrahead %}
+
+{% block content %}
+{% if found_users %}
+<div class="Content">
+    <div class="Posts">
+        <h3>Search results</h3>
+        {% for user in list %}
+            <div class="Post">
+                <a href="#">
+                    <div class="PostTitle">{{user.first_name}} {{user.last_name}}?</div>
+                </a>
+                <p>user.bio</p>
+                <p> <i class="fa fa-question" style="color:#468e9d"></i> user.questions questions asked.<br>
+                <i class="fa fa-check" style="color:#468e9d"></i> user.answers questions answered.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+
+<div class="Content">
+    <div class="Posts">
+        <h3>Search results</h3>
+            <div class="Post">
+                <a href="#">
+                    <div class="PostTitle"> Jane Doe</div>
+                </a>
+                <p>Mother of three beautiful kids and the cutest dog. I love gardening and ioga.</p>
+                <p> <i class="fa fa-question" style="color:#468e9d"></i> 50 questions asked.<br>
+                <i class="fa fa-check" style="color:#468e9d"></i> 13 questions answered.</p>
+            </div>
+            <div class="Post">
+                <a href="#">
+                    <div class="PostTitle"> Marina Vinals</div>
+                </a>
+                <p>I'm a student passionate about Nature and Mathematics.</p>
+                <p> <i class="fa fa-question" style="color:#468e9d"></i> 34 questions asked.<br>
+                <i class="fa fa-check" style="color:#468e9d"></i> 12 questions answered.</p>
+            </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock content %}
