@@ -40,7 +40,8 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = [
             'user',
-            'question'
+            'question',
+            'topic'
         ]
 
     def save(self, commit=True):
