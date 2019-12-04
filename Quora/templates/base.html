@@ -5,13 +5,11 @@
 
 <head>
     <link rel="stylesheet" href="{% static 'css/modal_question.css' %}">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="icon" href="https://qsf.fs.quoracdn.net/-3-images.favicon.ico-26-ae77b637b1e7ed2c.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -38,7 +36,6 @@
     <div class="notification">
 
     </div>
-
     {% endblock %}
 
     {% block header %}
@@ -49,8 +46,8 @@
                 Quokka
             </div>
         </a>
-
         <div class="user-overview">
+
             <div class="welcome">
                 <a class="text-link ghost" href="{% url 'profile' username=user.email %}">
                     {% if user.first_name != '' %}
@@ -65,6 +62,10 @@
             </button>
             <a href="{% url 'logout' %}" class="button ghost">Log out</a>
         </div>
+        <form class="example" action="#" style="margin:auto;width:200px">
+            <input type="text" placeholder="Find Users" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
     </div>
     {% else %}
     <div style="height: 5em"></div>
@@ -85,14 +86,14 @@
                             <div class="tab selected">Add Question</div>
                         </div>
                     </div>
-                    <form action="" method="POST">
+                    <form id="postForm" action="" method="POST">
                         {% csrf_token %}
                         {{ form.non_field_errors }}
                         <input type="hidden" name="user" value="{{ user.id }}">
                         <div class="modal_content modal_content_tabs">
                             <div>
                                 <div class="u-border-bottom u-margin-bottom--md u-padding-bottom--sm">
-                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--xs">
+                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--sm">
                                         Tips on
                                         getting good answers quickly</p>
                                     <ul class="tip_list">
@@ -152,23 +153,135 @@
                                         </div>
                                     </ul>
                                 </div>
-
-                                <div class="ask_modal_header u-flex">
-                                    <div class="user_asks_header">
-                                        {% if user.first_name != '' %}
-                                        <span class="user"> {{user.first_name}} {{user.last_name}} asked </span>
-                                        {% else %}
-                                        <span class="user"> {{user.email}} asked </span>
-                                        {% endif %}
+                                <div class="u-border-bottom u-margin-bottom--md u-padding-bottom--sm">
+                                    <div class="ask_modal_header u-flex">
+                                        <div class="user_asks_header">
+                                            {% if user.first_name != '' %}
+                                            <span class="user"> {{user.first_name}} {{user.last_name}} asked </span>
+                                            {% else %}
+                                            <span class="user"> {{user.email}} asked </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="AskQuestionSelector Selector" tabindex="-1">
+                                        <div class="selector_input_interaction">
+                                            <textarea class="selector_input" id="questionTextarea" name="question" rows="1"
+                                                onkeyup="textAreaAdjust(this)"
+                                                title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."
+                                                data-group="js-editable"
+                                                placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="AskQuestionSelector Selector" tabindex="-1">
-                                    <div class="selector_input_interaction">
-                                        <textarea class="selector_input" id="questionTextarea" name="question" rows="1"
-                                            onkeyup="textAreaAdjust(this)"
-                                            title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."
-                                            data-group="js-editable"
-                                            placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
+
+                                <div>
+                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--sm">Select one to three topics to categorise your post</p>
+                                     <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                 Technology
+                                             </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Mathematics
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Entertainment
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Business
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Humanities
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                 Literature
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Politics
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Healthcare
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Education
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Sports
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Cooking
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Science
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Nature
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Life
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Travel
+                                            </label>
+                                         </div>
+                                    </div>
+
+                                    <div class="row u-margin-bottom--sm">
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                News
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Art
+                                            </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                             <label class="topic-btn" onclick="setColor(event)";>
+                                                Other
+                                            </label>
+                                         </div>
                                     </div>
                                     <div>
                                         <select  name="topic">
@@ -196,12 +309,13 @@
                             </div>
                         </div>
                         <div class="modal_footer">
+
                             <div class="modal_actions">
                                 <span>
                                     <a class="button ghost" data-dismiss="modal" aria-label="Close" href="">Cancel</a>
                                 </span>
                                 <span>
-                                    <button class="button" name="submit" value="addQuestion">Add Question</button>
+                                    <button id="postQuestionButton" class="button" name="submit" value="addQuestion">Add Question</button>
                                 </span>
                             </div>
                         </div>
@@ -230,6 +344,25 @@
             o.style.height = "1px";
             o.style.height = (25 + o.scrollHeight) + "px";
         }
+
+        function setColor(e) {
+            var status = e.target.classList.contains('active-label');
+
+            e.target.classList.add(status ? 'inactive-label' : 'active-label');
+            e.target.classList.remove(status ? 'active-label' : 'inactive-label');
+        }
+
+        $('#postForm').submit(function() {
+            var num_active_topics = document.querySelectorAll('label.active-label').length;
+            if (num_active_topics === 0) {
+                alert("Select at least one topic for your question.");
+                return false;
+            } else if (num_active_topics > 3) {
+                alert("Select at most three topics for your question.")
+                return false;
+            }
+            return true; // return false to cancel form action
+        });
     </script>
 
 </body>

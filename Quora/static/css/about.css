@@ -8,7 +8,7 @@ html {
 
 body {
     font-size: 18px;
-    font-family: 'Overpass';
+    font-family: 'Overpass', sans-serif;
 }
 
 p {
@@ -46,6 +46,7 @@ p {
     text-align: justify;
     text-justify: inter-word;
 }
+
 .about-image{
     display: block;
     margin-left: auto;
