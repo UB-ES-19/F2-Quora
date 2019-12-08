@@ -43,6 +43,7 @@ textarea {
     display: flex;
     position: relative;
     align-items: center;
+    z-index: 100;
 }
 
 .header div {
@@ -223,4 +224,18 @@ form.example::after {
   content: "";
   clear: both;
   display: table;
+}
+
+#searchResults {
+    position: absolute;
+    width: 200px;
+    margin-left: -200px;
+    margin-top: 40px;
+    background: lightgrey;
+}
+
+.userResult {
+    padding: 10px;
+    width: 100%;
+    border-top: 1px solid grey;
 }
