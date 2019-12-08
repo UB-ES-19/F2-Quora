@@ -14,41 +14,31 @@
 <div class="container">
   <div class="row">
     <div class="column main">
+      <a class="text-link ghost" href="{% url 'profile' username=username.email %}">{{username.first_name}}
+        {{username.last_name}}</a> asks:
       <h2 class="question-title u-margin-bottom--md">{{post.question}}?</h2>
 
-         <div class="u-margin-bottom--sm">
-            <label class="topic-label">Mathematics</label>
-            <label class="topic-label">Art</label>
-            <label class="topic-label">Entertainment</label>
-        </div>
-
-      <div class="actions">
-        <a class="active" href="#"><i class="fa fa-fw fa-pencil" style="color:#33beff"></i> Answer</a>
-        <a href="#"><i class="fa fa-fw fa-feed"></i> Follow</a>
-        <a href="#"><i class="fa fa-fw fa-send"></i> Request</a>
-        <a href="#"><i class="fa fa-fw fa-comment"></i></a>
-        <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
-        <a href="#"><i class="fa fa-fw fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-fw fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-fw fa-share"></i></a>
-        <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
+      <div class="u-margin-bottom--sm">
+        {% for topic in topics %}
+        <label class="topic-label">{{topic}}</label>
+        {% endfor %}
       </div>
       {% if answers %}
-          <h3 class="subtitle">{{answers.count}} answers</h3>
-          {%for answ in answers %}
-              <div class="line main"></div><br>
-              <p>{{answ.user}}</p>
-              <p class="date">{{answ.date}}</p>
-              <p>{{answ.content}}</p>
-              <div class="actions">
-                  <a class="active" href="#"><i class="fa fa-fw fa-thumbs-o-up" style="color:#33beff"></i>Upvote</a>
-                  <a href="#"><i class="fa fa-fw fa-share"></i> Share</a>
-                  <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
-                  <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
-              </div>
-          {% endfor %}
+      <h3 class="subtitle">{{answers.count}} answers</h3>
+      {% for answ in answers %}
+      <div class="line main"></div><br>
+      <p>{{answ.user.first_name}} {{answ.user.last_name}}</p>
+      <p class="date">{{answ.date}}</p>
+      <p>{{answ.content}}</p>
+      <div class="actions">
+        <a class="active" href="#"><i class="fa fa-fw fa-thumbs-o-up" style="color:#33beff"></i>Upvote</a>
+        <a href="#"><i class="fa fa-fw fa-share"></i> Share</a>
+        <a href="#"><i class="fa fa-fw fa-thumbs-o-down"></i></a>
+        <a href="#"><i class="fa fa-fw fa-ellipsis-h"></i></a>
+      </div>
+      {% endfor %}
       {% else %}
-          <p>This post has no answers yet!</p>
+      <p>This post has no answers yet!</p>
       {% endif %}
 
       <form action="" method="POST">
@@ -56,7 +46,7 @@
         <input type="hidden" name="original_post" value="{{post.id}}">
         {% csrf_token %}
         {{ answer_form.content | addclass:'answer-input' }}
-          <button type="submit" class="button" name="submit" value="addAnswer">Add answer</button>
+        <button type="submit" class="button" name="submit" value="addAnswer">Add answer</button>
       </form>
     </div>
     <!--

@@ -8,21 +8,19 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="icon" href="https://qsf.fs.quoracdn.net/-3-images.favicon.ico-26-ae77b637b1e7ed2c.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,600&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
     {% block extrahead %}{% endblock extrahead %}
 </head>
 
@@ -49,11 +47,11 @@
         <div class="user-overview">
 
             <div class="welcome">
-                <a class="text-link ghost" href="{% url 'profile' username=user.email %}">
+                <a class="text-link ghost" href="{% url 'profile' username=request.user.email %}">
                     {% if user.first_name != '' %}
-                    Welcome, <b>{{user.first_name}} {{user.last_name}}</b>!
+                    Welcome, <b>{{request.user.first_name}} {{request.user.last_name}}</b>!
                     {% else %}
-                    Welcome, <b>{{user.email}}</b>!
+                    Welcome, <b>{{request.user.email}}</b>!
                     {% endif %}
                 </a>
             </div>
@@ -63,9 +61,12 @@
             <a href="{% url 'logout' %}" class="button ghost">Log out</a>
         </div>
         <form class="example" action="#" style="margin:auto;width:200px">
-            <input type="text" placeholder="Find Users" name="search">
+            <input type="text" placeholder="Find Users" name="search" id="userSearchInput"
+                onkeyup="retrieveUsersByName()" autocomplete="off">
             <button type="submit"><i class="fa fa-search"></i></button>
+            <div id="searchResults"></div>
         </form>
+
     </div>
     {% else %}
     <div style="height: 5em"></div>
@@ -165,8 +166,8 @@
                                     </div>
                                     <div class="AskQuestionSelector Selector" tabindex="-1">
                                         <div class="selector_input_interaction">
-                                            <textarea class="selector_input" id="questionTextarea" name="question" rows="1"
-                                                onkeyup="textAreaAdjust(this)"
+                                            <textarea class="selector_input" id="questionTextarea" name="question"
+                                                rows="1" onkeyup="textAreaAdjust(this)"
                                                 title="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."
                                                 data-group="js-editable"
                                                 placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."></textarea>
@@ -175,117 +176,120 @@
                                 </div>
 
                                 <div>
-                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--sm">Select one to three topics to categorise your post</p>
-                                     <div class="row u-margin-bottom--sm">
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
-                                                 Technology
-                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                    <p class="u-sans-font-main--large u-font-weight--medium u-margin-bottom--sm">Select
+                                        one to three topics to categorise your post</p>
+                                    <div class="row u-margin-bottom--sm">
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Technology')" ;>
+                                                Technology
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Mathematics')" ;>
                                                 Mathematics
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Entertainment')" ;>
                                                 Entertainment
                                             </label>
-                                         </div>
+                                        </div>
                                     </div>
 
                                     <div class="row u-margin-bottom--sm">
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Business')" ;>
                                                 Business
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Humanities')" ;>
                                                 Humanities
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
-                                                 Literature
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Literature')" ;>
+                                                Literature
                                             </label>
-                                         </div>
+                                        </div>
                                     </div>
 
                                     <div class="row u-margin-bottom--sm">
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Politics')" ;>
                                                 Politics
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Healthcare')" ;>
                                                 Healthcare
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Education')" ;>
                                                 Education
                                             </label>
-                                         </div>
+                                        </div>
                                     </div>
 
                                     <div class="row u-margin-bottom--sm">
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Sports')" ;>
                                                 Sports
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Cooking')" ;>
                                                 Cooking
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Science')" ;>
                                                 Science
                                             </label>
-                                         </div>
+                                        </div>
                                     </div>
 
                                     <div class="row u-margin-bottom--sm">
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Nature')" ;>
                                                 Nature
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Life')" ;>
                                                 Life
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Travel')" ;>
                                                 Travel
                                             </label>
-                                         </div>
+                                        </div>
                                     </div>
 
                                     <div class="row u-margin-bottom--sm">
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'News')" ;>
                                                 News
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Art')" ;>
                                                 Art
                                             </label>
-                                         </div>
-                                         <div class="col-sm-4">
-                                             <label class="topic-btn" onclick="setColor(event)";>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="topic-btn" onclick="selectTopic(event, 'Other')" ;>
                                                 Other
                                             </label>
-                                         </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="topic" id="topicInput" value="None">
                         <div class="modal_footer">
 
                             <div class="modal_actions">
@@ -293,7 +297,8 @@
                                     <a class="button ghost" data-dismiss="modal" aria-label="Close" href="">Cancel</a>
                                 </span>
                                 <span>
-                                    <button id="postQuestionButton" class="button" name="submit" value="addQuestion">Add Question</button>
+                                    <button id="postQuestionButton" class="button" name="submit" value="addQuestion">Add
+                                        Question</button>
                                 </span>
                             </div>
                         </div>
@@ -313,10 +318,19 @@
             </a>
         </footer>
 
-    </div> <!-— /.main-container-->
-
-    <script>
+    </div>
+    <!-— /.main-container--> <script>
+        window.selectedTopics = [];
         setTimeout(function () {$('#notification').addClass('hidden')}, 1500);
+
+        function retrieveUsersByName() {
+            const name = $("#userSearchInput").val();
+            if (name == "") $("#searchResults").html("");
+            $.get("/ajax_search/" + name, function (data) {
+                $("#searchResults").html(data);
+            });
+
+        }
 
         function textAreaAdjust(o) {
             o.style.height = "1px";
@@ -330,7 +344,21 @@
             e.target.classList.remove(status ? 'active-label' : 'inactive-label');
         }
 
-        $('#postForm').submit(function() {
+        function selectTopic(e, topic) {
+            setColor(e);
+            console.log(topic);
+            if (window.selectedTopics.includes(topic)) {
+
+                window.selectedTopics = window.selectedTopics.filter((i) => {
+                    return (i !== topic);
+                }
+                );
+            }
+            else window.selectedTopics.push(topic);
+            console.log(window.selectedTopics);
+        }
+
+        $('#postForm').submit(function () {
             var num_active_topics = document.querySelectorAll('label.active-label').length;
             if (num_active_topics === 0) {
                 alert("Select at least one topic for your question.");
@@ -339,8 +367,10 @@
                 alert("Select at most three topics for your question.")
                 return false;
             }
+            $('#topicInput').val(window.selectedTopics.join());
             return true; // return false to cancel form action
         });
+
     </script>
 
 </body>
