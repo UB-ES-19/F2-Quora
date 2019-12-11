@@ -72,7 +72,6 @@ def logout_page(request):
 
 
 def landing(request):
-
     context = {}
     if request.method == "POST":
         post = PostForm(request.POST)
@@ -264,3 +263,16 @@ def search(word):
 def saveImageDB(request, url):
     request.user.photo = url
     request.user.save()
+
+def searchTopic(request,topic):
+    post_list = filtering(request, Post.objects.all().order_by(
+        '-id'))
+
+    posts = []
+
+    for p in post_list:
+        num_answers = Answer.objects.filter(original_post=p.id).count()
+        if str(topic) in str(p.topic):
+            posts.append([p, p.topic.split(','), num_answers])
+    context = {'list': posts}
+    return render(request, 'index.html', context)
