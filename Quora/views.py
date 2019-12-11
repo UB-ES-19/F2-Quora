@@ -72,16 +72,8 @@ def logout_page(request):
 
 
 def landing(request):
-    post_list = filtering(request, Post.objects.all().order_by(
-        '-id'))
 
-    posts = []
-
-    for p in post_list:
-        num_answers = Answer.objects.filter(original_post=p.id).count()
-        posts.append([p, p.topic.split(','), num_answers])
-
-    context = {'list': posts}
+    context = {}
     if request.method == "POST":
         post = PostForm(request.POST)
 
@@ -92,6 +84,16 @@ def landing(request):
 
     if not request.user.is_authenticated:
         return redirect('/')
+    post_list = filtering(request, Post.objects.all().order_by(
+        '-id'))
+
+    posts = []
+
+    for p in post_list:
+        num_answers = Answer.objects.filter(original_post=p.id).count()
+        posts.append([p, p.topic.split(','), num_answers])
+    context = {'list': posts}
+
     return render(request, 'index.html', context)
 
 
@@ -134,6 +136,7 @@ def profile(request, username):
 
     posts = []
 
+    context = {}
     for p in post_list:
         num_answers = Answer.objects.filter(original_post=p.id).count()
         posts.append([p, p.topic.split(','), num_answers])
@@ -174,6 +177,14 @@ def profile(request, username):
                 unfollow(request, current_user)
                 is_following = False
 
+    post_list = filtering(request, Post.objects.all().order_by(
+        '-id'))
+
+    posts = []
+
+    for p in post_list:
+        num_answers = Answer.objects.filter(original_post=p.id).count()
+        posts.append([p, p.topic.split(','), num_answers])
     context = {'user': current_user,
                'posts': posts,
                'form': PersonalInfoForm(instance=current_user),
@@ -189,6 +200,16 @@ def about(request):
         post = PostForm(request.POST)
         try:
             post.save()
+            post_list = filtering(request, Post.objects.all().order_by(
+                '-id'))
+
+            posts = []
+
+            for p in post_list:
+                num_answers = Answer.objects.filter(original_post=p.id).count()
+                posts.append([p, p.topic.split(','), num_answers])
+            context = {'list': posts}
+            return render(request, 'index.html', context)
         except:
             context['error'] = 'Please enter a question!'
     return render(request, 'about.html', context)
