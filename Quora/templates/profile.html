@@ -32,6 +32,10 @@
                         {% else %}
                         <p>You haven't written your bio yet!</p>
                         {% endif %}
+
+                        <p>Favourite topics: </p>
+                        <label class="topic-label">Mathematics</label>
+                        <label class="topic-label">Science</label>
                     </div>
 
                 </div>
@@ -41,7 +45,7 @@
                 {% if request.user != user %}
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <button name="submit" value="follow"
+                    <input name="submit" value="follow"
                         class="btn followButton {% if is_following %} following {% endif %}" rel="6">
                         {% if is_following %}
                         Following
