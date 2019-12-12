@@ -1,0 +1,281 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/select_topics.css' %}">
+    <link rel="icon" href="https://qsf.fs.quoracdn.net/-3-images.favicon.ico-26-ae77b637b1e7ed2c.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    {% block extrahead %}{% endblock extrahead %}
+</head>
+
+
+<body>
+
+    <div class="header">
+        <div class="logo">
+            Quokka
+        </div>
+    </div>
+
+    <div class="main-container">
+
+        <div class="center-container">
+            <h3><b>Welcome {{request.user.first_name}} {{request.user.last_name}}!</b></h3>
+            <br>
+            <h4>What are your interests?</h4>
+            <p>Choose your favourite topics:</p>
+
+            <div class="topics-wrapper">
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/technology.jpg" %}" alt="Technology">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Technology')" ;>
+                        Technology
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/mathematics.jpg" %}" alt="Mathematics">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Mathematics')" ;>
+                        Mathematics
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/entertainment.jpg" %}" alt="Entertainment">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Entertainment')" ;>
+                        Entertainment
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/business.jpg" %}" alt="Business">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Business')" ;>
+                        Business
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/humanities.png" %}" alt="Humanities">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Humanities')" ;>
+                        Humanities
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/literature.jpg" %}" alt="Literature">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Literature')" ;>
+                        Literature
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/politics.png" %}" alt="Politics">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Politics')" ;>
+                        Politics
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/healthcare.png" %}" alt="Healthcare">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Healthcare')" ;>
+                        Healthcare
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/education.png" %}" alt="Education">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Education')" ;>
+                        Education
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/sports.jpg" %}" alt="Sports">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Sports')" ;>
+                        Sports
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/cooking.jpg" %}" alt="Cooking">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Cooking')" ;>
+                        Cooking
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/science.png" %}" alt="Science">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Science')" ;>
+                        Science
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/nature.jpg" %}" alt="Nature">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Nature')" ;>
+                        Nature
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/life.jpg" %}" alt="Life">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Life')" ;>
+                        Life
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/travel.jpg" %}" alt="Travel">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Travel')" ;>
+                        Travel
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/news.jpg" %}" alt="News">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'News')" ;>
+                        News
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/art.jpg" %}" alt="Art">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Art')" ;>
+                        Art
+                    </label>
+                </div>
+
+                <div class="topic_photo_card">
+                    <div class="photo">
+                        <div class="topic_photo_img topic_header_img">
+                            <img src="{% static "images/other.jpg" %}" alt="Other">
+                        </div>
+                    </div>
+                    <label class="topic-btn" onclick="selectTopic(event, 'Other')" ;>
+                        Other
+                    </label>
+                </div>
+
+                <div class="topics-footer">
+                    <button class="button">Continue</button>
+                </div>
+            </div>
+        </div>
+
+
+        <footer>
+            <a class="item-footer ghost" href="{% url 'about' %}">
+                About Quokka
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        function setColor(e) {
+            var status = e.target.classList.contains('active-label');
+
+            e.target.classList.add(status ? 'inactive-label' : 'active-label');
+            e.target.classList.remove(status ? 'active-label' : 'inactive-label');
+        }
+
+        function selectTopic(e, topic) {
+            setColor(e);
+            console.log(topic);
+            if (window.selectedTopics.includes(topic)) {
+
+                window.selectedTopics = window.selectedTopics.filter((i) => {
+                    return (i !== topic);
+                }
+                );
+            }
+            else window.selectedTopics.push(topic);
+            console.log(window.selectedTopics);
+        }
+    </script>
+
+
+</body>
+</html>
