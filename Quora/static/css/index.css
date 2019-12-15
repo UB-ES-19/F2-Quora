@@ -1,11 +1,12 @@
-.Content{
-    width: 75%;
-    margin: 0 auto;
+.Content {
+    width: 50%;
+    margin-left: 30px;
 }
 
-.Posts {
-    width: 100%;
-    margin: 0 auto;
+.Topics-list {
+    margin-top: 20px;
+    margin-left: 40px;
+    width: 225px;
 }
 
 .Post {
@@ -28,4 +29,29 @@
     color: #333;
     font-weight: bold;
     margin-top: .5em;
+}
+
+.Topics-list h5 {
+    margin-bottom: 20px;
+}
+
+.small-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+li {
+    margin-bottom: 15px;
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+li a {
+    color: black;
+}
+
+li a:hover {
+    color: #468e9d !important;
 }
