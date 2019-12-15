@@ -9,7 +9,9 @@
 
 {% block content %}
 <div class="Content">
-    <div class="Posts">
+
+    {% if list %}
+        <div class="Posts">
         {% for post in list %}
         <div class="Post">
             <div class="PostMeta">
@@ -41,6 +43,15 @@
         </div>
         {% endfor %}
     </div>
+    {% else %}
+        <div class="center-block">
+            <h3>There aren't any posts here...</h3>
+
+            <img src="{%  static 'images/sad.png' %}">
+
+            <h5>Why don't you follow some <a href="select_topics.html">topics</a> and <a href="user_search.html">friends</a>?</h5>
+        </div>
+    {% endif %}
 </div>
 
 {% endblock content %}
