@@ -1,6 +1,8 @@
 .Content {
-    width: 50%;
-    margin-left: 30px;
+    width: 75%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .Topics-list {
@@ -31,29 +33,29 @@
     margin-top: .5em;
 }
 
-.Topics-list h5 {
-    margin-bottom: 20px;
+h2 {
+    margin-bottom: 30px;
 }
 
-.small-icon {
-    width: 25px;
-    height: 25px;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-li {
-    margin-bottom: 15px;
-    margin-left: 20px;
-    font-size: 15px;
-}
-
-li a {
-    color: black;
-}
-
-li a:hover {
+b {
     color: #468e9d !important;
+}
+
+.center-block{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.center-block h3 {
+    margin-bottom: 30px;
+}
+
+.center-block h5 {
+    margin-top: 30px;
+}
+
+h5 b label {
+    cursor: pointer;
 }
 
 .topic-link, .topic-link:hover {
