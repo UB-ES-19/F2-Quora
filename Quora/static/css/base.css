@@ -44,6 +44,7 @@ textarea {
     position: relative;
     align-items: center;
     z-index: 100;
+    box-shadow: 0 18px 25px -25px rgba(0,0,0,.1);
 }
 
 .header div {
