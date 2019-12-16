@@ -40,9 +40,10 @@
                     <div class="Post">
                         <div class="PostMeta">
                             <div class="PostDate">{{post.0.date}}</div>
-                            <div class="PostUser"><a class="text-link ghost"
-                                    href="{% url 'profile' username=post.0.user.email %}"></a><b>{{post.0.user.first_name}}
-                                    {{post.0.user.last_name}}</b></a> asks:</div>
+                            <div class="PostUser">
+                                <a class="text-link ghost" href="{% url 'profile' username=post.0.user.email %}">
+                                    <b>{{post.0.user.first_name}} {{post.0.user.last_name}}</b></a> asks:
+                            </div>
                         </div>
                         <a href="{% url 'question' id=post.0.id %}">
                             <div class="PostTitle">{{post.0.question}}?</div>
@@ -65,8 +66,7 @@
                             {{post.2}} answers
                         </div>
                     </div>
-                    {% endfor %}
-                </div>
+                {% endfor %}
             </div>
 
         {% else %}

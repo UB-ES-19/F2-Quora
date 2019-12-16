@@ -78,7 +78,7 @@
     background-color: #e8e8e8;
 }
 .container{
-    margin: 0 auto;
+    margin: 30px auto;
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
