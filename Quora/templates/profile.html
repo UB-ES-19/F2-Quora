@@ -34,8 +34,8 @@
                         {% endif %}
 
                         <p>Favourite topics: </p>
-                        <label class="topic-label">Mathematics</label>
-                        <label class="topic-label">Science</label>
+                        <label class="topic-label"><a href="#" class="topic-link">{{topic}}</a></label>
+                        <label class="topic-label"><a href="#" class="topic-link">{{topic}}</a></label>
                     </div>
 
                 </div>
@@ -83,7 +83,7 @@
                             </a>
                             <div class="row u-margin-bottom--sm">
                                 {% for topic in post.1 %}
-                                <label class="topic-label">{{topic}}</label>
+                                <label class="topic-label"><a href="#" class="topic-link">{{topic}}</a></label>
                                 {% endfor %}
                             </div>
                             <div>

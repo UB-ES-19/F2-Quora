@@ -101,3 +101,8 @@
     width: 100%;
     resize: none;
 }
+
+.topic-link, .topic-link:hover {
+    cursor: pointer;
+    color: black;
+}
