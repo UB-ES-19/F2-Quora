@@ -34,11 +34,13 @@
                         {% endif %}
 
                         <p>Favourite topics: </p>
-                        <label class="topic-label"><a href="#" class="topic-link">Mathematics<!--{{topic}}--></a></label>
-                        <label class="topic-label"><a href="#" class="topic-link">Technology<!--{{topic}}--></a></label>
+                        {% for topic in topics %}
+                        <label class="topic-label"><a href="{% url 'topicSearch' topic %}"
+                                class="topic-link">{{ topic }}</a></label>
+                        {% endfor %}
 
                         <br>
-                        <a href="select_topics.html" class="select-topics">Select your favourite topics</a>
+                        <a href="{% url 'selectTopics' %}" class="select-topics">Select your favourite topics</a>
                     </div>
 
                 </div>
@@ -48,7 +50,7 @@
                 {% if request.user != user %}
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <input name="submit" value="follow"
+                    <button name="submit" value="follow"
                         class="btn followButton {% if is_following %} following {% endif %}" rel="6">
                         {% if is_following %}
                         Following

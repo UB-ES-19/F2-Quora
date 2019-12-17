@@ -28,5 +28,6 @@ urlpatterns = [
     path('about/', views.about, name="about"),
     path('profile/<username>/', views.profile, name="profile"),
     path('ajax_search/<str>/', views.ajaxSearch, name="ajaxSearch"),
-    path('select_topics/', views.selectTopics, name="selectTopics")
+    path('select_topics/', views.selectTopics, name="selectTopics"),
+    path('topic_search/<topic>/', views.topicSearch, name="topicSearch")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
