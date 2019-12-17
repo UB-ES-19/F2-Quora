@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm, Post, PostForm, AnswerForm, PersonalInfoForm
+from .forms import RegistrationForm, Post, PostForm, AnswerForm, PersonalInfoForm, TopicsForm
 from Quora.models import Answer, User, Follow
 
 
@@ -32,7 +32,7 @@ def index(request, *args, **kwards):
                 followDB.follower = user
                 followDB.save()
                 follow(request, username)
-                return redirect('/homepage/')
+                return redirect('select_topics/')
 
         elif request.POST.get("submit") == "login":
             form_signup = RegistrationForm()
@@ -232,7 +232,6 @@ def unfollow(request, userToUnfollow):
 
 
 def search(word):
-
     user_list = []
     for userObject in User.objects.all():
         if word == userObject.email or word in userObject.first_name or word in userObject.last_name:
@@ -243,3 +242,21 @@ def search(word):
 def saveImageDB(request, url):
     request.user.photo = url
     request.user.save()
+
+
+def selectTopics(request):
+    if request.method == "POST":
+
+        current_user = User.objects.get(email=request.user.email)
+
+        if request.POST.get("submit") == "selectTopics":
+            print(request.POST)
+            form = TopicsForm(request.POST, instance=request.user)
+            try:
+                form.save()
+                print("Success")
+            except Exception as e:
+                print("Error")
+                print(e)
+
+    return render(request, 'select_topics.html')

@@ -93,3 +93,21 @@ class PersonalInfoForm(forms.ModelForm):
             user.save()
 
         return user
+
+
+class TopicsForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = [
+            'topics'
+        ]
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        print(self.cleaned_data)
+        user.topics = self.cleaned_data['topics']
+        if commit:
+            user.save()
+
+        return user
