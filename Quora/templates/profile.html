@@ -32,6 +32,15 @@
                         {% else %}
                         <p>You haven't written your bio yet!</p>
                         {% endif %}
+
+                        <p>Favourite topics: </p>
+                        {% for topic in topics %}
+                        <label class="topic-label"><a href="{% url 'topicSearch' topic %}"
+                                class="topic-link">{{ topic }}</a></label>
+                        {% endfor %}
+
+                        <br>
+                        <a href="{% url 'selectTopics' %}" class="select-topics">Select your favourite topics</a>
                     </div>
 
                 </div>
@@ -79,7 +88,7 @@
                             </a>
                             <div class="row u-margin-bottom--sm">
                                 {% for topic in post.1 %}
-                                <label class="topic-label">{{topic}}</label>
+                                <label class="topic-label"><a href="#" class="topic-link">{{topic}}</a></label>
                                 {% endfor %}
                             </div>
                             <div>

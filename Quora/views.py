@@ -4,9 +4,13 @@ from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import operator
+from functools import reduce
+from django.db.models import Q
+from itertools import chain
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm, Post, PostForm, AnswerForm, PersonalInfoForm
+from .forms import RegistrationForm, Post, PostForm, AnswerForm, PersonalInfoForm, TopicsForm
 from Quora.models import Answer, User, Follow
 
 
@@ -32,7 +36,7 @@ def index(request, *args, **kwards):
                 followDB.follower = user
                 followDB.save()
                 follow(request, username)
-                return redirect('/homepage/')
+                return redirect('select_topics/')
 
         elif request.POST.get("submit") == "login":
             form_signup = RegistrationForm()
@@ -177,6 +181,7 @@ def profile(request, username):
     context = {'user': current_user,
                'posts': posts,
                'form': PersonalInfoForm(instance=current_user),
+               'topics': current_user.topics.split(',') if current_user.topics else [],
                'is_following': is_following}
 
     return render(request, 'profile.html', context)
@@ -208,9 +213,20 @@ def filtering(request, posts):
     try:
         follows = Follow.objects.get(follower=request.user)
         following = [f.email for f in follows.following.all()]
-        posts = Post.objects.filter(user__email__in=following).order_by('-id')
-    except:
+        posts_by_user = Post.objects.filter(user__email__in=following)
+        print("hi")
+        following_topics = request.user.topics.split(',')
+        print(following_topics)
+        query = reduce(operator.or_, (Q(topic__contains=item)
+                                      for item in following_topics))
+        posts_by_topic = Post.objects.filter(query)
+
+        posts = sorted(
+            chain(posts_by_topic, posts_by_user),
+            key=lambda instance: instance.date)
+    except Exception as e:
         # User is following no one. Return empty list.
+        print(e)
         posts = []
 
     return posts
@@ -232,7 +248,6 @@ def unfollow(request, userToUnfollow):
 
 
 def search(word):
-
     user_list = []
     for userObject in User.objects.all():
         if word == userObject.email or word in userObject.first_name or word in userObject.last_name:
@@ -243,3 +258,35 @@ def search(word):
 def saveImageDB(request, url):
     request.user.photo = url
     request.user.save()
+
+
+def selectTopics(request):
+    if request.method == "POST":
+
+        current_user = User.objects.get(email=request.user.email)
+
+        if request.POST.get("submit") == "selectTopics":
+            print(request.POST)
+            form = TopicsForm(request.POST, instance=request.user)
+            try:
+                form.save()
+                print("Success")
+                return redirect('homepage')
+            except Exception as e:
+                print("Error")
+                print(e)
+
+    return render(request, 'select_topics.html')
+
+
+def topicSearch(request, topic):
+
+    posts = []
+    post_list = Post.objects.filter(topic__contains=topic)
+
+    for p in post_list:
+        num_answers = Answer.objects.filter(original_post=p.id).count()
+        posts.append([p, p.topic.split(','), num_answers])
+
+    context = {'topic': topic, 'list': posts}
+    return render(request, 'topic_search.html', context)

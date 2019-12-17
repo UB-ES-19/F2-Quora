@@ -49,6 +49,7 @@ class User(AbstractUser):
     photo = models.ImageField(upload_to="Quora/static/images/",
                               default="Quora/static/images/profile_default.png", blank=True, null=True)
     description = models.TextField(default=None, blank=True, null=True)
+    topics = models.TextField(default=None, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
