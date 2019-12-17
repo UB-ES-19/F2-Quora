@@ -4,9 +4,13 @@ from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import operator
+from functools import reduce
+from django.db.models import Q
+from itertools import chain
 
 from django.utils.safestring import mark_safe
-from .forms import RegistrationForm, Post, PostForm, AnswerForm, PersonalInfoForm
+from .forms import RegistrationForm, Post, PostForm, AnswerForm, PersonalInfoForm, TopicsForm
 from Quora.models import Answer, User, Follow
 
 
@@ -31,7 +35,8 @@ def index(request, *args, **kwards):
                 followDB = Follow.objects.create()
                 followDB.follower = user
                 followDB.save()
-                return redirect('/homepage/')
+                follow(request, username)
+                return redirect('select_topics/')
 
         elif request.POST.get("submit") == "login":
             form_signup = RegistrationForm()
@@ -71,10 +76,19 @@ def logout_page(request):
 
 
 def landing(request):
-    context = {'list': filtering(request, Post.objects.all().order_by(
-        '-id'))}
+    post_list = filtering(request, Post.objects.all().order_by(
+        '-id'))
+
+    posts = []
+
+    for p in post_list:
+        num_answers = Answer.objects.filter(original_post=p.id).count()
+        posts.append([p, p.topic.split(','), num_answers])
+
+    context = {'list': posts}
     if request.method == "POST":
         post = PostForm(request.POST)
+
         try:
             post.save()
         except:
@@ -88,12 +102,14 @@ def landing(request):
 def question(request, id):
     post = Post.objects.get(id=id)
     answers = Answer.objects.filter(original_post=id)
+    topics = post.topic.split(',')
 
     context = {
         'post': post,
+        'topics': topics,
         'answers': answers,
         'answer_form': AnswerForm(),
-        'username': request.user.email
+        'username': post.user
     }
 
     if request.method == 'POST':
@@ -117,13 +133,23 @@ def question(request, id):
 def profile(request, username):
 
     current_user = User.objects.get(email=username)
-    posts = Post.objects.filter(user=current_user)
+    post_list = Post.objects.filter(user=current_user).order_by('-id')
+    is_following = False
+
+    posts = []
+
+    for p in post_list:
+        num_answers = Answer.objects.filter(original_post=p.id).count()
+        posts.append([p, p.topic.split(','), num_answers])
+
+    try:
+        follows = Follow.objects.get(follower=request.user)
+        is_following = current_user in follows.following.all()
+    except:
+        pass
 
     if current_user == None:
         return redirect('/')
-    context = {'user': current_user,
-               'posts': posts,
-               'form': PersonalInfoForm(instance=current_user)}
 
     if request.method == "POST":
         if request.POST.get("submit") == "editProfile":
@@ -138,8 +164,25 @@ def profile(request, username):
                 post.save()
             except:
                 context['error'] = 'Please enter a question!'
+        elif request.POST.get("submit") == "follow":
+            follows = Follow.objects.filter(follower=request.user)
+            if not follows.exists():
+                print("Follows doesn't exist, creating")
+                follows = Follow(follower=request.user)
+                follows.save()
+            follows = follows.first()
+            if not is_following:
+                follow(request, current_user)
+                is_following = True
+            else:
+                unfollow(request, current_user)
+                is_following = False
 
-
+    context = {'user': current_user,
+               'posts': posts,
+               'form': PersonalInfoForm(instance=current_user),
+               'topics': current_user.topics.split(',') if current_user.topics else [],
+               'is_following': is_following}
 
     return render(request, 'profile.html', context)
 
@@ -156,15 +199,94 @@ def about(request):
     return render(request, 'about.html', context)
 
 
+def ajaxSearch(request, str):
+    result = ""
+    for user in search(str):
+        result += '<a href="/profile/' + user.email + '"><div class="userResult"><b>' + user.first_name + ' ' + \
+            user.last_name + '</b><br>' + user.email + '</div></a>'
+    return HttpResponse(result)
+
+
 def filtering(request, posts):
     following = []
 
     try:
         follows = Follow.objects.get(follower=request.user)
         following = [f.email for f in follows.following.all()]
-        posts = Post.objects.filter(user__email__in=following).order_by('-id')
-    except:
+        posts_by_user = Post.objects.filter(user__email__in=following)
+        print("hi")
+        following_topics = request.user.topics.split(',')
+        print(following_topics)
+        query = reduce(operator.or_, (Q(topic__contains=item)
+                                      for item in following_topics))
+        posts_by_topic = Post.objects.filter(query)
+
+        posts = sorted(
+            chain(posts_by_topic, posts_by_user),
+            key=lambda instance: instance.date)
+    except Exception as e:
         # User is following no one. Return empty list.
+        print(e)
         posts = []
 
     return posts
+
+
+def follow(request, userToFollow):
+    obj = Follow.objects.get(follower=request.user)
+    followed = User.objects.get(email=userToFollow)
+    obj.following.add(followed.id)
+    obj.save()
+
+
+def unfollow(request, userToUnfollow):
+    obj = Follow.objects.get(follower=request.user)
+    followed = User.objects.get(email=userToUnfollow)
+    if userToUnfollow != request.user.email:
+        obj.following.remove(followed.id)
+        obj.save()
+
+
+def search(word):
+    user_list = []
+    for userObject in User.objects.all():
+        if word == userObject.email or word in userObject.first_name or word in userObject.last_name:
+            user_list.append(userObject)
+    return user_list
+
+
+def saveImageDB(request, url):
+    request.user.photo = url
+    request.user.save()
+
+
+def selectTopics(request):
+    if request.method == "POST":
+
+        current_user = User.objects.get(email=request.user.email)
+
+        if request.POST.get("submit") == "selectTopics":
+            print(request.POST)
+            form = TopicsForm(request.POST, instance=request.user)
+            try:
+                form.save()
+                print("Success")
+                return redirect('homepage')
+            except Exception as e:
+                print("Error")
+                print(e)
+
+    return render(request, 'select_topics.html')
+
+
+def topicSearch(request, topic):
+
+    posts = []
+    post_list = Post.objects.filter(topic__contains=topic)
+
+    for p in post_list:
+        num_answers = Answer.objects.filter(original_post=p.id).count()
+        posts.append([p, p.topic.split(','), num_answers])
+
+    context = {'topic': topic, 'list': posts}
+    return render(request, 'topic_search.html', context)

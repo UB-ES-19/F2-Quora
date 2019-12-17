@@ -46,9 +46,10 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(('email address'), unique=True)
-    photo = models.ImageField(
-        upload_to="photos", default=None, blank=True, null=True)
+    photo = models.ImageField(upload_to="Quora/static/images/",
+                              default="Quora/static/images/profile_default.png", blank=True, null=True)
     description = models.TextField(default=None, blank=True, null=True)
+    topics = models.TextField(default=None, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -69,6 +70,7 @@ class Post(models.Model):
     date = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     question = models.TextField()
+    topic = models.TextField(default=None)
 
 
 class Answer(models.Model):

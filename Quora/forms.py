@@ -40,7 +40,8 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = [
             'user',
-            'question'
+            'question',
+            'topic'
         ]
 
     def save(self, commit=True):
@@ -88,6 +89,24 @@ class PersonalInfoForm(forms.ModelForm):
         user.last_name = self.cleaned_data['last_name']
         user.photo = self.cleaned_data['photo']
         user.description = self.cleaned_data['description']
+        if commit:
+            user.save()
+
+        return user
+
+
+class TopicsForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = [
+            'topics'
+        ]
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        print(self.cleaned_data)
+        user.topics = self.cleaned_data['topics']
         if commit:
             user.save()
 
